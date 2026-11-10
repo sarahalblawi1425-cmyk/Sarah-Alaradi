@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مرساة — نموذج أولي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F4F6F9;font-family:'IBM Plex Sans Arabic',Tahoma,system-ui,sans-serif;color:#0F1B2D}
+a{color:#0B5C66}
+.wrap{max-width:1320px;margin:0 auto;padding:0 24px}
+header{background:#0B2545;color:#fff}
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:24px;min-height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:#fff;text-decoration:none}
+nav{display:flex;flex-wrap:wrap;gap:4px;flex:1 1 auto}
+nav button{font:inherit;font-size:15px;color:#C9D6E8;background:transparent;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+nav button.on{color:#fff;background:rgba(255,255,255,.12);font-weight:600}
+.iconbtn{position:relative;width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.iconbtn .dot{position:absolute;top:8px;left:9px;width:8px;height:8px;border-radius:50%;background:#F59E0B}
+.avatar{width:36px;height:36px;border-radius:50%;background:#13315C;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px}
+.notice{background:#FFF7E6;border-bottom:1px solid #F3D9A4;font-size:13px;color:#6B4A06}
+.notice .wrap{padding-top:10px;padding-bottom:10px}
+main{padding-top:28px;padding-bottom:64px;display:flex;flex-direction:column;gap:24px}
+h1{margin:0 0 6px;font-size:30px;color:#0B2545}
+.sub{margin:0;font-size:15px;color:#4A5568}
+.card{background:#fff;border:1px solid #DDE3EB;border-radius:14px}
+.form{padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;align-items:end}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:#2D3748}
+select,input{height:46px;border:1px solid #C5CFDB;border-radius:10px;padding:0 12px;font:inherit;font-size:15px;background:#fff;color:#0F1B2D;font-weight:400}
+.primary{height:46px;border:none;border-radius:10px;background:#0E7C86;color:#fff;font:inherit;font-size:15px;font-weight:600;cursor:pointer;padding:0 18px}
+.row{display:flex;flex-wrap:wrap;gap:24px;align-items:stretch}
+.col-side{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.col-main{flex:999 1 560px;min-width:0}
+h2{margin:0;font-size:19px;color:#0B2545}
+.muted{font-size:13px;color:#4A5568}
+.route{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:14px;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid #DDE3EB;font-family:inherit}
+.route.on{border:2px solid #0E7C86;box-shadow:0 4px 14px rgba(14,124,134,.15)}
+.rt{display:flex;justify-content:space-between;gap:12px}
+.rname{font-size:16px;font-weight:700;color:#0B2545;display:block}
+.tag{flex-shrink:0;font-size:12px;font-weight:600;color:#0B5C66;background:#DDF2F3;padding:4px 10px;border-radius:999px;height:fit-content}
+.bar{height:8px;border-radius:999px;background:#E6EBF1;overflow:hidden}
+.bar div{height:100%;border-radius:999px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stats span{display:block}
+.stats .l{font-size:12px;color:#4A5568}.stats .v{font-size:15px;font-weight:600}
+.map{background:#0B1D33;border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.maphead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #1E3A5F;color:#C9D6E8;font-size:12px}
+.maphead h2{color:#fff;font-size:16px;font-weight:600}
+.live{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#8FD3DA;background:rgba(143,211,218,.12);padding:3px 10px;border-radius:999px}
+.live i{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.25}}
+.leg{display:flex;flex-wrap:wrap;gap:14px}
+.leg span{display:flex;align-items:center;gap:6px}
+.leg b{width:10px;height:10px;border-radius:2px;display:inline-block}
+.mapfoot{padding:10px 18px;font-size:12px;color:#9FB2CC;border-top:1px solid #1E3A5F;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.segs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.segs li{border:1px solid #E6EBF1;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.section{padding:20px;display:flex;flex-direction:column;gap:16px}
+.between{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.chip{height:44px;padding:0 16px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer;background:#fff;color:#2D3748;border:1px solid #C5CFDB}
+.chip.on{background:#0B2545;color:#fff;border-color:#0B2545;font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.tile{padding:18px 20px;display:flex;flex-direction:column;gap:6px}
+.tile .big{font-size:26px;font-weight:700;color:#0B2545}
+.dark{background:#0B2545;color:#fff;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+th{background:#F7F9FC;text-align:right;padding:12px;font-weight:600;color:#4A5568;font-size:13px}
+td{padding:14px 12px;border-top:1px solid #E6EBF1}
+th:first-child,td:first-child{padding-right:20px}
+.outline{height:40px;padding:0 16px;border-radius:9px;border:1px solid #0E7C86;background:#fff;color:#0B5C66;font:inherit;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap}
+.view{display:none}.view.on{display:flex}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="logo">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#8FD3DA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><line x1="12" y1="7.5" x2="12" y2="21"/><line x1="8" y1="11" x2="16" y2="11"/><path d="M4 14c0 4 3.6 7 8 7s8-3 8-7"/></svg>
+      مرساة
+    </span>
+    <nav aria-label="القائمة الرئيسية">
+      <button type="button" class="on" data-view="search">البحث عن المسارات</button>
+      <button type="button" data-view="prices">تفقد الأسعار</button>
+      <button type="button" data-view="insurers">شركات التأمين</button>
+      <button type="button">مشاريعي</button>
+      <button type="button">المنهجية والمصادر</button>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <button type="button" class="iconbtn" aria-label="الإشعارات"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></button>
+      <span class="avatar">ش</span>
+    </div>
+  </div>
+</header>
+<div class="notice"><div class="wrap"><strong>نموذج أولي لشرح الفكرة:</strong> الأرقام والأسماء توضيحية، والأسعار تقديرية وتُراجع كل 48 ساعة، والتأكيد النهائي من شركة التأمين.</div></div>
+
+<!-- ============ SCREEN 1: ROUTE SEARCH ============ -->
+<main id="search" class="wrap view on">
+  <div class="between" style="align-items:flex-end">
+    <div>
+      <h1>ابحث عن مسارك البحري</h1>
+      <p class="sub">حدد ميناء الانطلاق وميناء الوصول السعودي، لترى المسارات البحرية المتاحة ودرجة الخطر في كل منطقة تعبرها.</p>
+    </div>
+    <div class="muted">● آخر تحديث للمؤشر: 10 نوفمبر 2026 · 11:30 ص</div>
+  </div>
+
+  <form class="card form" onsubmit="return false">
+    <label>ميناء الانطلاق<select><option>شنغهاي (الصين)</option><option>سنغافورة</option><option>مومباي (الهند)</option></select></label>
+    <label>ميناء الوصول<select><option>أي ميناء سعودي (قارن الكل)</option><option>ميناء جدة الإسلامي</option><option>ميناء الملك عبدالعزيز بالدمام</option><option>ميناء ينبع التجاري</option><option>ميناء جازان</option></select></label>
+    <label>نوع الشحنة<select><option>حاويات — بضائع عامة</option><option>سيارات</option><option>مواد غذائية مبردة</option><option>زيوت ومشتقات</option></select></label>
+    <label>تاريخ الإبحار<input type="text" value="24 نوفمبر 2026"></label>
+    <button type="button" class="primary">ابحث عن المسارات</button>
+  </form>
+
+  <div class="row">
+    <section class="col-side">
+      <div class="between"><h2>المسارات البحرية المتاحة (3)</h2><span class="muted">من شنغهاي</span></div>
+      <div id="routes" style="display:flex;flex-direction:column;gap:12px"></div>
+    </section>
+
+    <section class="col-main map">
+      <div class="maphead">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <h2>رادار الخطر وحركة السفن</h2>
+          <span class="live"><i></i>مباشر · 214 سفينة في المنطقة</span>
+        </div>
+        <div class="leg">
+          <span><b style="background:#3FA36B"></b>منخفض 0–3</span>
+          <span><b style="background:#E0A526"></b>متوسط 3–5</span>
+          <span><b style="background:#EA6A2A"></b>مرتفع 5–7</span>
+          <span><b style="background:#E5383B"></b>حرج 7–10</span>
+        </div>
+      </div>
+      <svg viewBox="0 0 640 470" role="img" aria-label="خريطة توضيحية لمناطق الخطر وحركة السفن حول المملكة" style="width:100%;height:auto;display:block">
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+          <linearGradient id="sweepGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4ADE80" stop-opacity="0"/><stop offset="1" stop-color="#4ADE80" stop-opacity=".22"/></linearGradient>
+        </defs>
+        <rect width="640" height="470" fill="#0E2A4A"/>
+        <path d="M0,0 L60,0 L55,60 L49,89 L30,70 L22,92 L111,264 L160,349 L236,435 L409,431 L420,470 L0,470 Z" fill="#2A3B52" stroke="#4A6283"/>
+        <path d="M352,0 L640,0 L640,140 L609,143 L549,136 L517,102 L470,85 L400,64 L360,30 Z" fill="#2A3B52" stroke="#4A6283"/>
+        <path d="M70,0 L345,0 L341,32 L341,55 L386,119 L400,125 L412,116 L418,140 L470,150 L496,145 L517,119 L530,140 L564,179 L592,202 L560,250 L470,300 L362,373 L277,409 L243,414 L224,322 L153,224 L130,168 L90,110 L64,53 Z" fill="#2A3B52" stroke="#4A6283" stroke-width="1.2"/>
+        <path d="M80,45 L330,48 L341,55 L386,119 L400,125 L412,116 L418,140 L470,150 L478,195 L512,212 L470,300 L406,322 L300,326 L230,322 L224,322 L153,224 L130,168 L90,110 Z" fill="#33506F" stroke="#6E8DB3" stroke-width="1.2"/>
+        <g fill="none" stroke="#4A6283" stroke-dasharray="3 3"><path d="M0,213 L118,213"/><path d="M140,330 L200,420"/><path d="M210,440 L300,470"/><path d="M470,150 L496,145 L512,190"/></g>
+        <g filter="url(#glow)" opacity=".8">
+          <ellipse cx="110" cy="120" rx="30" ry="70" fill="#3FA36B" transform="rotate(-30 110 120)"/>
+          <ellipse cx="185" cy="270" rx="26" ry="60" fill="#E0A526" transform="rotate(-30 185 270)"/>
+          <ellipse cx="232" cy="378" rx="24" ry="48" fill="#E5383B" transform="rotate(-20 232 378)"/>
+          <ellipse cx="330" cy="425" rx="85" ry="18" fill="#E5383B"/>
+          <ellipse cx="530" cy="122" rx="34" ry="20" fill="#EA6A2A"/>
+          <ellipse cx="445" cy="100" rx="48" ry="20" fill="#E0A526"/>
+          <ellipse cx="590" cy="300" rx="60" ry="80" fill="#3FA36B"/>
+        </g>
+        <g fill="none" stroke="#8FD3DA" stroke-opacity=".12">
+          <circle cx="320" cy="235" r="90"/><circle cx="320" cy="235" r="180"/><circle cx="320" cy="235" r="270"/><circle cx="320" cy="235" r="360"/>
+          <line x1="320" y1="0" x2="320" y2="470"/><line x1="0" y1="235" x2="640" y2="235"/>
+        </g>
+        <g id="sweep">
+          <path d="M320,235 L740,235 A420,420 0 0,1 684,445 Z" fill="url(#sweepGrad)"/>
+          <line x1="320" y1="235" x2="740" y2="235" stroke="#4ADE80" stroke-opacity=".5" stroke-width="1.5"/>
+        </g>
+        <path id="r1" d="M640,345 L470,425 L330,428 L245,420 L215,350 L182,280 L153,224" fill="none" stroke="#fff" stroke-dasharray="8 6" stroke-linecap="round"/>
+        <path id="r2" d="M640,240 L600,212 L555,160 L530,125 L480,112 L386,119" fill="none" stroke="#fff" stroke-dasharray="8 6" stroke-linecap="round"/>
+        <path id="r3" d="M12,32 L48,70 L80,120 L120,180 L153,224" fill="none" stroke="#fff" stroke-dasharray="8 6" stroke-linecap="round"/>
+        <g id="ships"></g>
+        <g font-size="12" fill="#A9BCD4" text-anchor="middle" font-family="inherit">
+          <text x="300" y="215" font-size="15" font-weight="700" fill="#E4ECF6">المملكة العربية السعودية</text>
+          <text x="40" y="150">مصر</text><text x="60" y="300">السودان</text><text x="150" y="410">إثيوبيا</text>
+          <text x="340" y="460">الصومال</text><text x="320" y="360">اليمن</text><text x="520" y="230">عُمان</text>
+          <text x="530" y="40">إيران</text><text x="230" y="22">العراق</text>
+          <text x="490" y="165" font-size="10">الإمارات</text><text x="416" y="132" font-size="10">قطر</text>
+        </g>
+        <g font-size="11" fill="#7FB3D5" font-style="italic" text-anchor="middle">
+          <text x="168" y="250" transform="rotate(55 168 250)">البحر الأحمر</text>
+          <text x="440" y="85">الخليج العربي</text><text x="540" y="380">بحر العرب</text><text x="330" y="445">خليج عدن</text>
+        </g>
+        <g font-size="12" font-weight="600" fill="#fff">
+          <circle cx="153" cy="224" r="6" fill="#8FD3DA" stroke="#0B1D33" stroke-width="2"/><text x="164" y="222" text-anchor="start">جدة</text>
+          <circle cx="386" cy="119" r="6" fill="#8FD3DA" stroke="#0B1D33" stroke-width="2"/><text x="372" y="112" text-anchor="end">الدمام</text>
+          <circle cx="130" cy="168" r="4" fill="#C9D6E8"/><text x="140" y="168" text-anchor="start" font-weight="400" fill="#C9D6E8">ينبع</text>
+          <circle cx="224" cy="322" r="4" fill="#C9D6E8"/><text x="214" y="318" text-anchor="end" font-weight="400" fill="#C9D6E8">جازان</text>
+        </g>
+        <g font-size="11" font-weight="700" fill="#fff" text-anchor="middle">
+          <rect x="248" y="380" width="78" height="22" rx="6" fill="#B42318"/><text x="287" y="395">باب المندب 7.4</text>
+          <rect x="545" y="92" width="70" height="22" rx="6" fill="#C2410C"/><text x="580" y="107">هرمز 5.8</text>
+          <rect x="8" y="104" width="86" height="22" rx="6" fill="#2E7D4F"/><text x="51" y="119">شمال الأحمر 2.1</text>
+        </g>
+      </svg>
+      <div class="mapfoot">
+        <div class="leg">
+          <span><svg width="14" height="10" viewBox="-7 -5 14 10" aria-hidden="true"><path d="M-7,-3.5 L7,0 L-7,3.5 L-4,0 Z" fill="#fff"/></svg>سفن على مسارك المحدد</span>
+          <span><svg width="14" height="10" viewBox="-7 -5 14 10" aria-hidden="true"><path d="M-6,-3 L6,0 L-6,3 L-3.5,0 Z" fill="#8FD3DA"/></svg>حركة السفن العامة (AIS)</span>
+        </div>
+        <span>خريطة توضيحية · المصادر المقترحة: قوائم لجنة الحرب المشتركة، بيانات تتبع السفن (AIS)، الهيئة العامة للموانئ</span>
+      </div>
+    </section>
+  </div>
+
+  <section class="card section">
+    <div class="between">
+      <div><h2>المناطق التي يعبرها المسار</h2><span class="muted" id="segName"></span></div>
+      <button type="button" class="primary" id="goPrices">تفقد أسعار التأمين لهذا المسار</button>
+    </div>
+    <ol class="segs" id="segs"></ol>
+  </section>
+</main>
+
+<!-- ============ SCREEN 2: PRICES ============ -->
+<main id="prices" class="wrap view">
+  <div>
+    <h1>تفقد أسعار التأمين البحري</h1>
+    <p class="sub">قارن أقساط تأمين مخاطر الحرب بين المؤمّنين السعوديين لكل مسار، وتابع تغيّرها قبل أن تقرر.</p>
+  </div>
+
+  <div class="card" style="padding:18px 20px;display:flex;flex-wrap:wrap;gap:16px;align-items:end">
+    <div style="flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:600;color:#2D3748">المسار</span>
+      <div id="chips" role="group" aria-label="اختر المسار" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+    </div>
+    <label style="flex:1 1 200px">قيمة الشحنة (ريال)<input id="value" type="text" value="10,000,000"></label>
+    <label style="flex:1 1 200px">نوع الوثيقة<select><option>الكل</option><option>وثيقة رحلة واحدة</option><option>وثيقة سنوية مفتوحة</option></select></label>
+  </div>
+
+  <div class="tiles">
+    <div class="card tile"><span class="muted">أقل قسط متاح</span><span class="big" id="tLow"></span><span class="muted">من مؤمّن أ · وثيقة رحلة</span></div>
+    <div class="card tile"><span class="muted">متوسط نسبة القسط</span><span class="big" id="tAvg"></span><span class="muted">من قيمة الشحنة</span></div>
+    <div class="card tile"><span class="muted">التغير خلال 14 يوماً</span><span class="big" id="tChg"></span><span class="muted" id="tChgN"></span></div>
+    <div class="card tile"><span class="muted">درجة خطر المسار</span><span class="big" id="tRisk"></span><span class="muted" id="tRiskN"></span></div>
+  </div>
+
+  <div class="row">
+    <section class="card col-main" style="padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+      <div class="between"><h2 style="font-size:18px">نسبة القسط خلال آخر 14 يوماً</h2><span class="muted" style="font-size:12px">متوسط عروض المؤمّنين · %</span></div>
+      <svg viewBox="0 0 600 220" role="img" aria-label="رسم توضيحي لتغير نسبة القسط خلال 14 يوماً" style="width:100%;height:auto;display:block">
+        <g stroke="#E6EBF1"><line x1="40" y1="20" x2="590" y2="20"/><line x1="40" y1="80" x2="590" y2="80"/><line x1="40" y1="140" x2="590" y2="140"/><line x1="40" y1="200" x2="590" y2="200"/></g>
+        <g font-size="11" fill="#4A5568" text-anchor="end"><text x="32" y="24">0.50</text><text x="32" y="84">0.33</text><text x="32" y="144">0.17</text><text x="32" y="204">0</text></g>
+        <g font-size="11" fill="#4A5568" text-anchor="middle"><text x="45" y="216">28 أكتوبر</text><text x="315" y="216">3 نوفمبر</text><text x="580" y="216">اليوم</text></g>
+        <polyline id="area" fill="#0E7C86" fill-opacity=".08" stroke="none"/>
+        <polyline id="line" fill="none" stroke="#0E7C86" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle id="last" r="5" fill="#0E7C86" stroke="#fff" stroke-width="2"/>
+      </svg>
+      <p class="muted" style="margin:0">أقساط مخاطر الحرب تُعرض عادةً بصلاحية قصيرة، ويُعاد تسعيرها كل 48 ساعة تقريباً حسب تغيّر الخطر.</p>
+    </section>
+    <aside class="col-side" style="gap:16px">
+      <div class="dark">
+        <div style="font-size:13px;color:#8FD3DA;font-weight:600">توصية التوقيت</div>
+        <p id="advice" style="margin:0;font-size:16px;font-weight:600;line-height:1.6"></p>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#C9D6E8"><span id="conf"></span><a href="#" style="color:#8FD3DA">كيف حُسبت؟</a></div>
+      </div>
+      <div class="card" style="padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+        <h3 style="margin:0;font-size:16px;color:#0B2545">تنبيه السعر</h3>
+        <p class="muted" style="margin:0;font-size:14px;line-height:1.6">احفظ الشحنة في مشاريعي، ويصلك إشعار عند تغيّر القسط أو وصوله للسعر الذي تحدده.</p>
+        <label>نبّهني إذا نزل القسط عن (ريال)<input id="target" type="text"></label>
+        <button type="button" class="primary" id="saveAlert">حفظ وتفعيل التنبيه</button>
+      </div>
+    </aside>
+  </div>
+
+  <section class="card" style="overflow:hidden">
+    <div class="between" style="padding:18px 20px;border-bottom:1px solid #E6EBF1">
+      <div><h2>عروض المؤمّنين السعوديين</h2><span class="muted" id="insName"></span></div>
+      <span class="muted" style="font-size:12px">الترتيب حسب السعر والتغطية، ولا يوجد ترتيب مدفوع</span>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>شركة التأمين</th><th>نوع الوثيقة</th><th>النسبة</th><th>القسط التقديري</th><th>صلاحية العرض</th><th></th></tr></thead>
+        <tbody id="ins"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+
+<!-- ============ SCREEN 3: INSURERS ============ -->
+<main id="insurers" class="wrap view">
+  <div class="between" style="align-items:flex-end">
+    <div>
+      <h1>شركات التأمين البحري السعودية</h1>
+      <p class="sub">تعرّف على المؤمّنين المحليين، وما يغطيه كل منهم، ومن يشارك في الوعاء الوطني لتأمين مخاطر الحرب.</p>
+    </div>
+    <div class="muted">6 شركات · 4 منها مشاركة في الوعاء الوطني</div>
+  </div>
+
+  <div class="dark" style="flex-direction:row;flex-wrap:wrap;align-items:center;gap:18px">
+    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#8FD3DA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M9 21V10"/><path d="M15 21V10"/><path d="M2 10l10-6 10 6z"/></svg>
+    <div style="flex:1 1 400px;display:flex;flex-direction:column;gap:4px">
+      <span style="font-size:13px;color:#8FD3DA;font-weight:600">الوعاء الوطني لتأمين مخاطر الحرب البحرية</span>
+      <span style="font-size:16px;font-weight:600;line-height:1.6">آلية وطنية بقيادة الشركة السعودية لإعادة التأمين. تستفيد منها عبر شركات التأمين المشاركة الموسومة بالعلامة أدناه.</span>
+    </div>
+    <button type="button" class="outline" style="background:transparent;color:#8FD3DA;border-color:#8FD3DA">عن الوعاء الوطني</button>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <button type="button" class="chip on">الكل (6)</button>
+    <button type="button" class="chip">مشارك في الوعاء الوطني (4)</button>
+    <button type="button" class="chip">حاويات</button>
+    <button type="button" class="chip">زيوت ومشتقات</button>
+    <button type="button" class="chip">سيارات</button>
+    <button type="button" class="chip">مواد مبردة</button>
+  </div>
+
+  <div id="insGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px"></div>
+</main>
+
+<script>
+var ROUTES = [
+  { id:1, chip:'إلى جدة عبر باب المندب', name:'شنغهاي ← ميناء جدة الإسلامي', via:'عبر مضيق ملقا وبحر العرب وباب المندب', risk:7.4, days:'18 يوماً', nm:'6,600 ميل', rate:0.42,
+    segs:[['مضيق ملقا',1.8],['بحر العرب',2.4],['خليج عدن',7.1],['باب المندب',7.4],['جنوب البحر الأحمر',5.2]],
+    trend:[0.30,0.31,0.31,0.33,0.34,0.34,0.36,0.38,0.38,0.39,0.40,0.41,0.42,0.42],
+    advice:'الأقساط على هذا المسار في ارتفاع منذ أسبوعين. إن كان المسار ضرورياً، فالتأمين مبكراً قد يكون أوفر.', conf:'متوسطة (64%)',
+    pts:[[640,345],[470,425],[330,428],[245,420],[215,350],[182,280],[153,224]] },
+  { id:2, chip:'إلى الدمام عبر هرمز', name:'شنغهاي ← ميناء الملك عبدالعزيز بالدمام', via:'عبر مضيق ملقا وبحر العرب ومضيق هرمز', risk:5.8, days:'16 يوماً', nm:'5,900 ميل', rate:0.31, rec:true,
+    segs:[['مضيق ملقا',1.8],['بحر العرب',2.4],['خليج عُمان',4.6],['مضيق هرمز',5.8],['الخليج العربي',3.9]],
+    trend:[0.36,0.35,0.35,0.34,0.34,0.33,0.33,0.32,0.32,0.31,0.31,0.31,0.31,0.31],
+    advice:'الأقساط على هذا المسار مستقرة بعد انخفاض تدريجي. يُرجَّح أن تبقى قريبة من مستواها خلال 48 ساعة القادمة.', conf:'متوسطة (68%)',
+    pts:[[640,240],[600,212],[555,160],[530,125],[480,112],[386,119]] },
+  { id:3, chip:'إلى جدة عبر السويس (الشمالي)', name:'شنغهاي ← ميناء جدة الإسلامي (المسار الشمالي)', via:'حول رأس الرجاء الصالح ثم المتوسط وقناة السويس', risk:3.2, days:'33 يوماً', nm:'14,500 ميل', rate:0.12,
+    segs:[['مضيق ملقا',1.8],['المحيط الهندي',1.5],['رأس الرجاء الصالح',2.2],['البحر المتوسط',2.0],['قناة السويس',3.2],['شمال البحر الأحمر',2.1]],
+    trend:[0.12,0.12,0.13,0.12,0.12,0.12,0.12,0.11,0.12,0.12,0.12,0.12,0.12,0.12],
+    advice:'أقل الأقساط بين المسارات، لكن مدة الإبحار أطول بنحو أسبوعين. قارن ذلك بتكلفة التأخير على شحنتك.', conf:'مرتفعة (81%)',
+    pts:[[12,32],[48,70],[80,120],[120,180],[153,224]] }
+];
+var INSURERS = [
+  ['مؤمّن أ',true,'وثيقة رحلة · حرب + بضائع',0.94,'48 ساعة'],
+  ['مؤمّن ب',true,'وثيقة رحلة · حرب فقط',1.00,'48 ساعة'],
+  ['مؤمّن ج',false,'وثيقة سنوية مفتوحة',1.08,'7 أيام'],
+  ['مؤمّن د',false,'وثيقة رحلة · حرب + بضائع',1.15,'24 ساعة']
+];
+var sel = 2;
+
+function color(r){return r>=7?'#B42318':r>=5?'#C2410C':r>=3?'#A86A0C':'#2E7D4F';}
+function label(r){return r>=7?'حرج':r>=5?'مرتفع':r>=3?'متوسط':'منخفض';}
+function fmt(n){return Math.round(n).toLocaleString('en-US')+' ر.س';}
+function cur(){return ROUTES.filter(function(r){return r.id===sel;})[0];}
+function value(){var v=parseFloat(String(document.getElementById('value').value).replace(/[^0-9.]/g,''));return isNaN(v)?0:v;}
+
+function renderSearch(){
+  var html='';
+  ROUTES.forEach(function(r){
+    html+='<button type="button" class="route'+(r.id===sel?' on':'')+'" data-id="'+r.id+'">'+
+      '<div class="rt"><div><span class="rname">'+r.name+'</span><span class="muted">'+r.via+'</span></div>'+(r.rec?'<span class="tag">توازن بين المدة والخطر</span>':'')+'</div>'+
+      '<div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;font-size:13px"><span class="muted">أعلى درجة خطر على المسار</span><span style="font-weight:700;color:'+color(r.risk)+'">'+r.risk.toFixed(1)+' / 10 · '+label(r.risk)+'</span></div>'+
+      '<div class="bar"><div style="width:'+(r.risk*10)+'%;background:'+color(r.risk)+'"></div></div></div>'+
+      '<div class="stats"><div><span class="l">مدة الإبحار</span><span class="v">'+r.days+'</span></div><div><span class="l">المسافة</span><span class="v">'+r.nm+'</span></div><div><span class="l">مناطق خطر</span><span class="v">'+(r.segs.filter(function(s){return s[1]>=5;}).length||'لا يوجد')+'</span></div></div>'+
+      '</button>';
+  });
+  document.getElementById('routes').innerHTML=html;
+  [1,2,3].forEach(function(i){var p=document.getElementById('r'+i);p.setAttribute('stroke-width',i===sel?3.5:1.5);p.setAttribute('stroke-opacity',i===sel?1:.35);});
+  var c=cur();
+  document.getElementById('segName').textContent=c.name+' · '+c.via;
+  document.getElementById('segs').innerHTML=c.segs.map(function(s,i){
+    return '<li style="border-top:4px solid '+color(s[1])+'"><span class="muted" style="font-size:12px">المرحلة '+(i+1)+'</span><span style="font-size:15px;font-weight:600">'+s[0]+'</span><span style="font-size:13px;font-weight:700;color:'+color(s[1])+'">'+s[1].toFixed(1)+' · '+label(s[1])+'</span></li>';
+  }).join('');
+}
+
+function renderPrices(){
+  var c=cur(), v=value();
+  document.getElementById('chips').innerHTML=ROUTES.map(function(r){return '<button type="button" class="chip'+(r.id===sel?' on':'')+'" data-id="'+r.id+'">'+r.chip+'</button>';}).join('');
+  var low=v*c.rate*0.94/100;
+  document.getElementById('tLow').textContent=fmt(low);
+  document.getElementById('tAvg').textContent=(c.rate*1.04).toFixed(2)+'%';
+  var pct=(c.trend[13]-c.trend[0])/c.trend[0]*100, ch=document.getElementById('tChg');
+  ch.textContent=(pct>0?'+':'')+pct.toFixed(0)+'%';
+  ch.style.color=pct>3?'#B42318':pct<-3?'#2E7D4F':'#0B2545';
+  document.getElementById('tChgN').textContent=pct>3?'في ارتفاع':pct<-3?'في انخفاض':'مستقر تقريباً';
+  var rk=document.getElementById('tRisk'); rk.textContent=c.risk.toFixed(1)+' / 10'; rk.style.color=color(c.risk);
+  document.getElementById('tRiskN').textContent='مؤشر مرساة · '+label(c.risk);
+  document.getElementById('advice').textContent=c.advice;
+  document.getElementById('conf').textContent='درجة الثقة: '+c.conf;
+  document.getElementById('target').value=(Math.round(low*0.9/100)*100).toLocaleString('en-US');
+  document.getElementById('insName').textContent=c.name+' · '+c.via;
+  var pts=c.trend.map(function(t,i){return [(45+i*535/13).toFixed(1),(200-t/0.5*180).toFixed(1)];});
+  var line=pts.map(function(p){return p.join(',');}).join(' ');
+  document.getElementById('line').setAttribute('points',line);
+  document.getElementById('area').setAttribute('points','45,200 '+line+' 580,200');
+  document.getElementById('last').setAttribute('cx',pts[13][0]); document.getElementById('last').setAttribute('cy',pts[13][1]);
+  document.getElementById('ins').innerHTML=INSURERS.map(function(m){
+    var r=c.rate*m[3];
+    return '<tr><td><div style="font-weight:600">'+m[0]+'</div>'+(m[1]?'<div style="font-size:12px;color:#0B5C66">مشارك في الوعاء الوطني لمخاطر الحرب</div>':'')+'</td><td>'+m[2]+'</td><td>'+r.toFixed(3)+'%</td><td style="font-weight:700;color:#0B2545">'+fmt(v*r/100)+'</td><td>'+m[4]+'</td><td style="text-align:left;padding-left:20px"><button type="button" class="outline">اطلب عرضاً رسمياً</button></td></tr>';
+  }).join('');
+}
+
+function renderAll(){renderSearch();renderPrices();}
+
+function show(view){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===view);});
+  document.querySelectorAll('nav button[data-view]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-view')===view);});
+  window.scrollTo(0,0);
+}
+
+document.querySelectorAll('nav button[data-view]').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-view'));});});
+document.getElementById('goPrices').addEventListener('click',function(){show('prices');});
+document.getElementById('routes').addEventListener('click',function(e){var b=e.target.closest('.route');if(b){sel=+b.getAttribute('data-id');renderAll();}});
+document.getElementById('chips').addEventListener('click',function(e){var b=e.target.closest('.chip');if(b){sel=+b.getAttribute('data-id');renderAll();}});
+document.getElementById('value').addEventListener('input',renderPrices);
+document.getElementById('saveAlert').addEventListener('click',function(){this.textContent='✓ تم تفعيل التنبيه';});
+
+/* ---- live radar: ships + sweep ---- */
+var RED=[[12,32],[80,120],[153,224],[215,350],[245,420],[330,428],[470,425],[640,345]];
+var GULF=[[386,119],[480,112],[530,125],[555,160],[600,212],[640,240]];
+var SEA=[[640,300],[560,330],[470,400],[409,440]];
+var SHIPS=[
+  {sel:true,o:.15},{sel:true,o:.62},
+  {p:RED,s:.8,o:.05,rev:true},{p:RED,s:.8,o:.38},{p:RED,s:.8,o:.71,rev:true},
+  {p:GULF,s:1.1,o:.2},{p:GULF,s:1.1,o:.55,rev:true},{p:GULF,s:1.1,o:.85},
+  {p:SEA,s:.9,o:.1},{p:SEA,s:.9,o:.6,rev:true},
+  {p:ROUTES[2].pts,s:.7,o:.4,rev:true},{p:ROUTES[0].pts,s:.9,o:.3,rev:true}
+];
+var NS='http://www.w3.org/2000/svg', shipLayer=document.getElementById('ships');
+SHIPS.forEach(function(sh){
+  var g=document.createElementNS(NS,'g');
+  if(sh.sel){var c=document.createElementNS(NS,'circle');c.setAttribute('r',9);c.setAttribute('fill','#fff');c.setAttribute('fill-opacity','.08');g.appendChild(c);}
+  var p=document.createElementNS(NS,'path');
+  p.setAttribute('d',sh.sel?'M-7,-3.5 L7,0 L-7,3.5 L-4,0 Z':'M-6,-3 L6,0 L-6,3 L-3.5,0 Z');
+  p.setAttribute('fill',sh.sel?'#FFFFFF':'#8FD3DA');
+  g.appendChild(p); shipLayer.appendChild(g); sh.el=g;
+});
+function at(pts,f,rev){
+  f=f-Math.floor(f); if(rev)f=1-f;
+  var L=[],T=0,i; for(i=0;i<pts.length-1;i++){var dx=pts[i+1][0]-pts[i][0],dy=pts[i+1][1]-pts[i][1],l=Math.sqrt(dx*dx+dy*dy);L.push(l);T+=l;}
+  var d=f*T;
+  for(i=0;i<L.length;i++){ if(d<=L[i]||i===L.length-1){var k=Math.min(d/L[i],1),a=pts[i],b=pts[i+1];
+    return 'translate('+(a[0]+(b[0]-a[0])*k).toFixed(1)+' '+(a[1]+(b[1]-a[1])*k).toFixed(1)+') rotate('+(Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI+(rev?180:0)).toFixed(0)+')';}
+    d-=L[i]; }
+}
+var t0=null;
+function frame(ts){
+  if(t0===null)t0=ts;
+  var t=(ts-t0)/80, v=t*0.0022;
+  SHIPS.forEach(function(sh){sh.el.setAttribute('transform',sh.sel?at(cur().pts,v+sh.o,false):at(sh.p,v*sh.s+sh.o,sh.rev));});
+  document.getElementById('sweep').setAttribute('transform','rotate('+((t*3)%360).toFixed(1)+' 320 235)');
+  requestAnimationFrame(frame);
+}
+
+var INS_CARDS = [
+  ['مؤمّن أ',true,['حاويات','زيوت ومشتقات','سيارات'],['رحلة واحدة','سنوية مفتوحة'],'0.28–0.36%','4.6'],
+  ['مؤمّن ب',true,['حاويات','مواد مبردة'],['رحلة واحدة'],'0.30–0.38%','4.4'],
+  ['مؤمّن ج',true,['زيوت ومشتقات','حاويات'],['سنوية مفتوحة','تأمين السفينة'],'0.32–0.40%','4.3'],
+  ['مؤمّن د',true,['سيارات','حاويات'],['رحلة واحدة'],'0.33–0.42%','4.1'],
+  ['مؤمّن هـ',false,['حاويات'],['رحلة واحدة','سنوية مفتوحة'],'0.35–0.45%','4.0'],
+  ['مؤمّن و',false,['مواد مبردة','سيارات'],['سنوية مفتوحة'],'0.37–0.48%','3.9']
+];
+document.getElementById('insGrid').innerHTML = INS_CARDS.map(function(c){
+  var chips=function(a,bg,fg){return a.map(function(t){return '<span style="font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:'+bg+';color:'+fg+'">'+t+'</span>';}).join('');};
+  return '<div class="card" style="padding:18px 20px;display:flex;flex-direction:column;gap:14px">'+
+    '<div class="between"><div style="display:flex;align-items:center;gap:12px"><span class="avatar" style="width:44px;height:44px;background:#E6EBF1;color:#0B2545;font-size:16px">'+c[0].split(' ')[1]+'</span>'+
+    '<div><div style="font-size:17px;font-weight:700;color:#0B2545">'+c[0]+'</div><div class="muted">تقييم المستخدمين '+c[5]+' / 5</div></div></div>'+
+    (c[1]?'<span class="tag">✓ مشارك في الوعاء الوطني</span>':'')+'</div>'+
+    '<div style="display:flex;flex-direction:column;gap:6px"><span class="muted" style="font-size:12px">أنواع الشحنات</span><div style="display:flex;flex-wrap:wrap;gap:6px">'+chips(c[2],'#F1F4F8','#2D3748')+'</div></div>'+
+    '<div style="display:flex;flex-direction:column;gap:6px"><span class="muted" style="font-size:12px">أنواع الوثائق</span><div style="display:flex;flex-wrap:wrap;gap:6px">'+chips(c[3],'#DDF2F3','#0B5C66')+'</div></div>'+
+    '<div class="between" style="border-top:1px solid #E6EBF1;padding-top:12px"><div><span class="muted" style="font-size:12px;display:block">النطاق الاسترشادي للقسط</span><span style="font-size:18px;font-weight:700;color:#0B2545" dir="ltr">'+c[4].replace('–','% – ')+'</span> <span class="muted">من قيمة الشحنة</span></div>'+
+    '<button type="button" class="outline">اطلب عرضاً رسمياً</button></div></div>';
+}).join('');
+
+renderAll();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
