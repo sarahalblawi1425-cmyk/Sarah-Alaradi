@@ -82,7 +82,13 @@ Phases overlap. Work on the next phase starts before the previous one finishes. 
 | 5 | Official launch and regional expansion | 37–60 | **Ministry of Transport & Logistic Services:** national adoption. **TGA and Insurance Authority:** operations and regulation. | Annual index review; regional expansion decision |
 | ∞ | Index updates and review | 13–60 | Continuous | Annual review |
 
-The platform's proposed owners are TGA and the Insurance Authority, under the Ministry of Transport & Logistic Services. Roles are proposals, to be set formally in the agreements.
+**Expected owning entities (deck slide 18):**
+- **Ministry of Transport & Logistic Services:** umbrella and oversight, within the National Transport & Logistics Strategy; adopts the index as a national reference.
+- **TGA:** maritime transport regulator; owns and operates the platform with a national tech partner.
+- **Insurance Authority:** regulates insurers, supervises the national war-risk pool, approves price display and comparison.
+- **Mawani:** data partner (ports, vessel movement); benefits as shippers are drawn to Saudi ports.
+
+In cooperation with Saudi Re (the pool), Border Guard (maritime incident data) and Saudi insurers. Roles are proposals, to be set formally in the agreements.
 
 ### Estimated cost: about SAR 27M over 5 years
 This is a planning estimate, reviewed at each gate (◆). It assumes a local team, cloud hosting inside KSA, and 2 years of operation after launch.

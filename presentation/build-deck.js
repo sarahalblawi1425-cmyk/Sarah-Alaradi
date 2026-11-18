@@ -488,36 +488,31 @@ async function rings(color, opacity) {
   }
   s.addText("◆ بوابة مراجعة لكل مرحلة. المراحل تتداخل، فنبدأ العمل على المرحلة التالية دون انتظار اكتمال السابقة.", ar({ x: M, y: 6.68, w: CW, h: 0.28, fontSize: 11, color: MUTED }));
 
-  // ================= T2. PARTNERS PER PHASE =================
+  // ================= T2. OWNING ENTITIES =================
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "التنفيذ" });
-  kicker(s, "الشركاء والبوابات");
-  s.addText("من يعمل في كل مرحلة؟", { placeholder: "title" });
-  s.addText("في كل مرحلة نُشرك فقط الجهة التي تملك البيانات أو الصلاحية أو الخبرة التي تحتاجها.", ar({ x: M, y: 1.5, w: CW, h: 0.4, fontSize: 14.5, color: MUTED }));
+  kicker(s, "الجهات المالكة");
+  s.addText("مَن يتولى منصة مرساة؟", { placeholder: "title" });
+  s.addText("نتوقع أن تتولى المنصةَ أربع جهات، لكل منها دور واضح:", ar({ x: M, y: 1.55, w: CW, h: 0.4, fontSize: 15, color: MUTED }));
   {
-    const hdr = (x) => ({ text: x, options: { bold: true, color: WHITE, fill: { color: NAVY }, fontSize: 12.5 } });
-    const ent = (list, fill) => ({ text: list.flatMap((e, i) => [
-        { text: e[0] + ": ", options: { bold: true, color: NAVY } },
-        { text: e[1], options: { color: MUTED, breakLine: i < list.length - 1 } }]), options: { fill } });
-    const rows = [
-      ["صنع مقياس الخطر", "الأشهر 1–15", [["الهيئة العامة للموانئ (موانئ)", "بيانات الموانئ وحركة السفن"], ["حرس الحدود", "بيانات الحوادث الأمنية البحرية، عبر مركز جدة لتبادل المعلومات البحرية"], ["كلية الدراسات البحرية بجامعة الملك عبدالعزيز", "مراجعة مستقلة لمنهجية المؤشر"]], "منهجية معتمدة، والإصدار الأول للمؤشر"],
-      ["الاتفاق مع المؤمّنين", "الأشهر 9–18", [["هيئة التأمين", "التنظيم والموافقات"], ["الشركة السعودية لإعادة التأمين", "الربط مع الوعاء الوطني (بضاعة وسفن)"], ["شركات التأمين السعودية", "العروض والأسعار"]], "اتفاقيتان على الأقل مع مؤمّنين سعوديين"],
-      ["بناء المنصة وتأمينها", "الأشهر 13–30", [["الهيئة العامة للنقل", "مالك المنصة"], ["شركة تقنية وطنية (مثل «علم»)", "البناء والتشغيل والأمن السيبراني، والربط البرمجي مع المؤمّنين"]], "اجتياز اختبار الاختراق وضوابط الأمن السيبراني"],
-      ["إطلاق تجريبي", "الأشهر 28–36", [["مصدّرون ومستوردون مختارون", "تجربة مسار تأمين البضاعة"], ["شركة شحن وطنية (مثل «البحري»)", "تجربة مسار تأمين السفينة"]], "تحقيق مؤشرات التجربة: دقة التقدير ورضا المستخدمين"],
-      ["الإطلاق الرسمي والتوسع", "الأشهر 37–60", [["وزارة النقل والخدمات اللوجستية", "الاعتماد الوطني"], ["الهيئة العامة للنقل وهيئة التأمين", "التشغيل والتنظيم"]], "مراجعة سنوية للمؤشر، وقرار التوسع الإقليمي"],
+    const ents = [
+      [lu.LuLandmark, "وزارة النقل والخدمات اللوجستية", "المظلة والإشراف", "تتبع لها المنصة ضمن الاستراتيجية الوطنية للنقل والخدمات اللوجستية، وتعتمد مؤشر مرساة مرجعاً وطنياً."],
+      [lu.LuShip, "الهيئة العامة للنقل", "مالك المنصة ومشغّلها", "الجهة المنظِّمة للنقل البحري، تملك المنصة وتشغّلها مع شريك تقني وطني."],
+      [lu.LuShieldCheck, "هيئة التأمين", "منظِّم الجانب التأميني", "تنظّم شركات التأمين وتشرف على الوعاء الوطني لمخاطر الحرب، وتعتمد عرض الأسعار والمقارنة في المنصة."],
+      [lu.LuAnchor, "الهيئة العامة للموانئ (موانئ)", "شريك البيانات", "تزوّد المؤشر ببيانات الموانئ وحركة السفن، وتستفيد من جذب الشاحنين إلى الموانئ السعودية."],
     ];
-    const data = [[hdr("بوابة المرحلة"), hdr("من يعمل عليها، ودوره"), hdr("المرحلة")]];
-    rows.forEach((r, i) => {
-      const fill = { color: i % 2 ? "F7F9FC" : WHITE };
-      data.push([
-        { text: r[3], options: { color: "8A5A00", bold: true, fill: { color: "FFF6E5" } } },
-        ent(r[2], fill),
-        { text: [{ text: r[0], options: { bold: true, color: NAVY, breakLine: true } }, { text: r[1], options: { color: MUTED, fontSize: 11.5 } }], options: { fill } },
-      ]);
-    });
-    s.addTable(data, { x: M, y: 1.95, w: CW, colW: [2.85, 6.6, CW - 9.45], fontFace: F, fontSize: 12, align: "right", valign: "middle", rtlMode: true,
-      border: { type: "solid", pt: 0.75, color: LINE }, margin: [0.04, 0.12, 0.04, 0.12], rowH: [0.38, 0.92, 0.84, 0.7, 0.7, 0.7] });
+    const cw4 = (CW - 3 * 0.3) / 4, y0 = 2.1, hh = 4.15;
+    for (let i = 0; i < 4; i++) {
+      const x = R - cw4 - i * (cw4 + 0.3), hl = i === 0, e = ents[i];
+      card(s, x, y0, cw4, hh, hl ? NAVY : WHITE, hl ? NAVY : LINE);
+      await bubble(s, e[0], x + cw4 / 2 - 0.55, y0 + 0.35, 1.1, hl ? TEAL : ICE_BG, hl ? WHITE : TEAL_D);
+      s.addText(e[1], ctr({ x: x + 0.2, y: y0 + 1.6, w: cw4 - 0.4, h: 0.65, fontSize: 16, bold: true, color: hl ? WHITE : NAVY, valign: "middle" }));
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.45, y: y0 + 2.32, w: cw4 - 0.9, h: 0.38, rectRadius: 0.19, fill: { color: hl ? NAVY2 : ICE_BG }, line: { color: hl ? NAVY2 : ICE_BG } });
+      s.addText(e[2], ctr({ x: x + 0.45, y: y0 + 2.32, w: cw4 - 0.9, h: 0.38, fontSize: 12.5, bold: true, color: hl ? ICE : TEAL_D, valign: "middle" }));
+      s.addText(e[3], ctr({ x: x + 0.25, y: y0 + 2.85, w: cw4 - 0.5, h: 1.15, fontSize: 12.5, color: hl ? SOFT : MUTED }));
+    }
   }
-  s.addText("الأدوار مقترحة، وتُحدَّد رسمياً في الاتفاقيات.", ar({ x: M, y: 6.7, w: CW, h: 0.26, fontSize: 10, color: "8A97A8" }));
+  s.addText([{ text: "وبالتعاون مع: ", options: { bold: true, color: NAVY } }, { text: "الشركة السعودية لإعادة التأمين (الوعاء الوطني)، وحرس الحدود (بيانات الحوادث البحرية)، وشركات التأمين السعودية.", options: { color: MUTED } }],
+    ar({ x: M, y: 6.45, w: CW, h: 0.35, fontSize: 13 }));
 
   // ================= 13b. COST =================
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "التنفيذ" });
