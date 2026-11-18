@@ -70,37 +70,22 @@ The final price is always confirmed by the insurer.
 3. The national pool.
 4. Regulators: the Insurance Authority (هيئة التأمين) and the Transport General Authority (TGA, الهيئة العامة للنقل).
 
-### Proposed owner and participating entities
-Owned by TGA and the Insurance Authority under the Ministry of Transport & Logistic Services. Roles are proposed and will be set formally in the agreements phase.
+### Timeline and partners (5 years, overlapping phases)
+Phases overlap. Work on the next phase starts before the previous one finishes. Each phase has a review gate (◆), but a gate doesn't block parallel work. Each phase only involves the entities that hold the data, mandate or expertise it needs.
 
-| Group | Entity | Proposed role |
-|---|---|---|
-| Ownership and regulation | Ministry of Transport & Logistic Services | Umbrella and oversight |
-| | Transport General Authority (TGA) | Co-owner, operates the platform |
-| | Insurance Authority | Co-owner, regulates the insurance side |
-| Data sources | Saudi Ports Authority (Mawani) | Port data and vessel movement |
-| | Border Guard (حرس الحدود) | Maritime security incident data |
-| | ZATCA (هيئة الزكاة والضريبة والجمارك) | Shipment and cargo data |
-| Insurance market | Saudi Re | Leads the national war-risk pool |
-| | Saudi insurers | Offers, prices and coverage |
-| | Shipowners and shippers | Users, and a source of feedback |
-| Protection and enablement | National Cybersecurity Authority (NCA) | Cybersecurity controls and compliance |
-| | SDAIA | Data and AI governance |
-| | Universities and research centres | Independent review of the index methodology |
+| # | Phase | Months | Who works on it, and their role | Gate |
+|---|---|---|---|---|
+| 1 | Build the Saudi risk index | 1–15 | **Mawani:** port data and vessel movement. **Border Guard:** maritime security incidents, via the Jeddah Maritime Information Sharing Center. **KAU Faculty of Maritime Studies** (accredited by TGA): independent review of the methodology. | Method approved; first index release (m12) |
+| 2 | Agreements with insurers | 9–18 | **Insurance Authority:** regulation and approvals. **Saudi Re:** link with the national pool (which covers cargo and hull). **Saudi insurers:** offers and prices. | At least 2 insurer agreements |
+| 3 | Build and secure the platform | 13–30 | **TGA:** platform owner. **A national tech company (e.g. Elm):** build, operations, cybersecurity, insurer APIs. | Pass penetration testing and NCA controls |
+| 4 | Pilot | 28–36 | **Selected exporters and importers:** cargo track. **A national shipping company (e.g. Bahri):** hull track. | Pilot KPIs: estimate accuracy, user satisfaction |
+| 5 | Official launch and regional expansion | 37–60 | **Ministry of Transport & Logistic Services:** national adoption. **TGA and Insurance Authority:** operations and regulation. | Annual index review; regional expansion decision |
+| ∞ | Index updates and review | 13–60 | Continuous | Annual review |
 
-### Implementation plan (5 years, stage-gate)
-A phase starts only after the previous phase passes its gate. The plan and the cost are reviewed at each gate.
-
-| # | Phase | Months | Gate to pass |
-|---|---|---|---|
-| 1 | Build the Saudi risk index (ports, incidents, AIS; transparent method) | 1–12 | Method approved after independent review; data agreements signed |
-| 2 | Agreements with Saudi insurers (cargo and hull) | 13–18 | At least 2 agreements; link with the national pool |
-| 3 | Build and secure the platform (secure coding) | 19–30 | Pass penetration testing and NCA controls |
-| 4 | Pilot with a limited set of shippers and insurers | 31–36 | Hit pilot KPIs: estimate accuracy, user satisfaction |
-| 5 | Official launch, then regional expansion | 37–60 | Annual index review; regional expansion decision |
+The platform's proposed owners are TGA and the Insurance Authority, under the Ministry of Transport & Logistic Services. Roles are proposals, to be set formally in the agreements.
 
 ### Estimated cost: about SAR 27M over 5 years
-This is a planning estimate, reviewed at each gate. It assumes a local team, cloud hosting inside KSA, and 2 years of operation after launch.
+This is a planning estimate, reviewed at each gate (◆). It assumes a local team, cloud hosting inside KSA, and 2 years of operation after launch.
 
 | Item | SAR (M) |
 |---|---|
@@ -323,7 +308,7 @@ Priority: **P0** = before the demo, **P1** = strengthens the pitch, **P2** = lat
 | Path | What it is |
 |---|---|
 | `presentation/prototype/mirsah-prototype.html` | The prototype (source of truth) |
-| `presentation/Mirsah-Pitch.pptx` / `Mirsah-Pitch-preview.pdf` | The pitch deck (23 slides, Arabic, includes the demo video) |
+| `presentation/Mirsah-Pitch.pptx` / `Mirsah-Pitch-preview.pdf` | The pitch deck (22 slides, Arabic, includes the demo video). Order: problem → solution → website → value and impact → execution (timeline, partners, cost, challenges) → team |
 | `presentation/screenshots/` | Prototype screenshots used in the deck |
 | `presentation/build-deck.js` | Script that generates the deck (pptxgenjs) |
 
