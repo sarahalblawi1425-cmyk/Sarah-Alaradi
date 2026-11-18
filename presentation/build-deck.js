@@ -93,7 +93,7 @@ async function rings(color, opacity) {
   s.addImage({ data: ANCHOR_ICE, x: R - 0.88, y: 1.22, w: 0.66, h: 0.66 });
   s.addText("مرساة", ar({ x: 7.3, y: 2.25, w: R - 7.3, h: 1.3, fontSize: 72, bold: true, color: NAVY }));
   s.addText("منصة وطنية للتأمين البحري وتقييم مخاطر المسارات", ar({ x: 7.3, y: 3.6, w: R - 7.3, h: 0.9, fontSize: 22, bold: true, color: TEAL }));
-  s.addText("نصنع مؤشر خطر سعودياً للمسارات البحرية، ونجمع للشاحن الخطر والتكلفة وعروض المؤمّنين السعوديين في مكان واحد.", ar({ x: 7.3, y: 4.55, w: R - 7.3, h: 0.95, fontSize: 15, color: MUTED, lineSpacingMultiple: 1.15 }));
+  s.addText("نصنع مؤشر خطر سعودياً للمسارات البحرية، ونجمع لصاحب البضاعة ومالك السفينة الخطر والتكلفة وعروض المؤمّنين السعوديين في مكان واحد.", ar({ x: 7.3, y: 4.55, w: R - 7.3, h: 0.95, fontSize: 15, color: MUTED, lineSpacingMultiple: 1.15 }));
   s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 7.3, y: 5.75, w: R - 7.3, h: 0.5, rectRadius: 0.25, fill: { color: ICE_BG }, line: { color: ICE_BG } });
   s.addText("نقل ثون 5  ·  المسار الرابع: الخدمات اللوجستية وسلاسل الإمداد", ctr({ x: 7.35, y: 5.75, w: R - 7.4, h: 0.5, fontSize: 11.5, bold: true, color: TEAL_D, valign: "middle" }));
 
@@ -101,31 +101,35 @@ async function rings(color, opacity) {
   pres.addSection({ title: "المشكلة" });
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "المشكلة" });
   kicker(s, "المشكلة");
-  s.addText("التوترات الجيوسياسية رفعت تأمين الشحن البحري بشكل حاد", { placeholder: "title" });
-  s.addText("حين تعبر السفينة منطقة توتر أمني مثل البحر الأحمر أو مضيق هرمز، تدفع قسطاً إضافياً اسمه «تأمين مخاطر الحرب». ومع تصاعد التوترات في المنطقة، وسّعت لجنة الحرب المشتركة في لندن المنطقة عالية الخطر في البحر الأحمر (يوليو 2026)، فقفزت الأقساط.",
-    ar({ x: M, y: 1.6, w: CW, h: 0.95, fontSize: 15.5, color: MUTED, lineSpacingMultiple: 1.2 }));
+  s.addText("الأوضاع الجيوسياسية رفعت تأمين الشحن البحري بشكل حاد", { placeholder: "title" });
+  s.addText("حين تعبر السفينة منطقة توتر أمني مثل البحر الأحمر أو مضيق هرمز، يُضاف قسط يُعرف في السوق باسم «تأمين مخاطر الحرب». ومع تصاعد الأوضاع الجيوسياسية في المنطقة بين 2023 و2026، تضاعف هذا القسط عشرات المرات.",
+    ar({ x: M, y: 1.58, w: CW, h: 0.95, fontSize: 15, color: MUTED, lineSpacingMultiple: 1.2 }));
   {
-    const gapA = 0.75, gapB = 0.3, nw = (CW - gapA - gapB) / 3, y = 3.25, ch = 2.35;
-    const xs = [R - nw, R - 2 * nw - gapA, R - 3 * nw - gapA - gapB];
-    // before
-    s.addText("قبل الحرب", ctr({ x: xs[0], y: 2.68, w: nw, h: 0.42, fontSize: 15, bold: true, color: "2E7D4F", valign: "middle" }));
-    // after (spans two cards)
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: xs[2], y: 2.68, w: 2 * nw + gapB, h: 0.42, rectRadius: 0.21, fill: { color: "FDE8E2" }, line: { color: "FDE8E2" } });
-    s.addText("بعد الحرب", ctr({ x: xs[2], y: 2.68, w: 2 * nw + gapB, h: 0.42, fontSize: 15, bold: true, color: "B42318", valign: "middle" }));
-    const nums = [["100 ألف $", "رحلة ناقلة واحدة", "تكلفة تأمين مخاطر الحرب لرحلة واحدة قبل التوترات", "2E7D4F"],
-      ["3 ملايين $", "رحلة من ينبع", "قسط الناقلات: من أقل من 1% إلى 3% من قيمة السفينة", ORANGE],
-      ["7 ملايين $", "موانئ جنوبية أو عبر هرمز", "وقد يصل القسط إلى 7% لموانئ جنوب ينبع مثل جازان", RED]];
-    nums.forEach((n, i) => {
-      const x = xs[i];
-      card(s, x, y, nw, ch);
-      s.addText(n[1], ar({ x: x + 0.3, y: y + 0.22, w: nw - 0.6, h: 0.4, fontSize: 14, bold: true, color: MUTED }));
-      s.addText(n[0], ar({ x: x + 0.3, y: y + 0.65, w: nw - 0.6, h: 0.85, fontSize: 40, bold: true, color: n[3] }));
-      s.addText(n[2], ar({ x: x + 0.3, y: y + 1.55, w: nw - 0.6, h: 0.7, fontSize: 13, color: MUTED }));
+    const cw = 7.0, cx = M, cy = 2.65, ch = 3.55;
+    card(s, cx, cy, cw, ch);
+    s.addText("قسط تأمين جسم السفينة: % من قيمة السفينة لكل رحلة", ar({ x: cx + 0.3, y: cy + 0.15, w: cw - 0.6, h: 0.4, fontSize: 14, bold: true, color: NAVY }));
+    s.addChart(pres.charts.BAR, [{ name: "% من قيمة السفينة", labels: ["2023", "2024", "ينبع 2026", "جنوب ينبع 2026"], values: [0.05, 1, 3, 7] }], {
+      x: cx + 0.15, y: cy + 0.55, w: cw - 0.3, h: ch - 0.7, barDir: "col", chartColors: ["3FA36B", "E0A526", "EA6A2A", "E5383B"],
+      showValue: true, dataLabelPosition: "outEnd", dataLabelColor: INK, dataLabelFontSize: 13, dataLabelFontBold: true, dataLabelFontFace: "+mn-lt",
+      dataLabelFormatCode: '0.0#"%"', catAxisLabelColor: MUTED, catAxisLabelFontSize: 12, catAxisLabelFontFace: "+mn-lt", catAxisOrientation: "maxMin",
+      catAxisLineShow: false, valAxisHidden: true, valGridLine: { style: "none" }, catGridLine: { style: "none" }, showLegend: false, barGapWidthPct: 55,
     });
-    s.addShape(pres.shapes.LINE, { x: xs[0] - gapA + 0.12, y: y + ch / 2, w: gapA - 0.24, h: 0, line: { color: RED, width: 3, beginArrowType: "triangle" } });
+    // right: dollar impact
+    const rx = cx + cw + 0.35, rw = R - rx;
+    s.addText("ماذا يعني ذلك لناقلة قيمتها 100 مليون دولار؟", ar({ x: rx, y: cy, w: rw, h: 0.4, fontSize: 14, bold: true, color: TEAL_D }));
+    const rows = [["2023", "نحو 50 ألف $", "قبل تصاعد التوترات في البحر الأحمر", "2E7D4F"], ["2026 · ينبع", "نحو 3 ملايين $", "بعد أن كان القسط أقل من 1% في يوليو 2026", ORANGE], ["2026 · جنوب ينبع وهرمز", "نحو 7 ملايين $", "وفي هرمز بين 6% و9% من قيمة السفينة", RED]];
+    rows.forEach((r, i) => {
+      const y = cy + 0.5 + i * 1.03;
+      card(s, rx, y, rw, 0.9);
+      s.addShape(pres.shapes.OVAL, { x: rx + rw - 0.42, y: y + 0.2, w: 0.18, h: 0.18, fill: { color: r[3] }, line: { color: r[3] } });
+      s.addText(r[0], ar({ x: rx + 0.2, y: y + 0.1, w: rw - 0.75, h: 0.32, fontSize: 12.5, bold: true, color: MUTED }));
+      s.addText(r[1], ar({ x: rx + 0.2, y: y + 0.42, w: 2.0, h: 0.42, fontSize: 19, bold: true, color: r[3], valign: "middle" }));
+      s.addText(r[2], ar({ x: rx + 2.2, y: y + 0.42, w: rw - 2.4 - 0.35, h: 0.42, fontSize: 11, color: MUTED, valign: "middle" }));
+    });
   }
-  s.addText("والأقساط لا تثبت: تغطي عادةً 7 أيام فقط، وتُراجع كل 24 ساعة.", ar({ x: M, y: 5.85, w: CW, h: 0.45, fontSize: 17, bold: true, color: NAVY }));
-  s.addText("المصادر: رويترز عبر Insurance Journal (سبتمبر 2026)، Insurance Journal (يوليو 2026). الأرقام عروض سوقية وليست أسعاراً متفقاً عليها.", ar({ x: M, y: 6.4, w: CW, h: 0.3, fontSize: 10, color: "8A97A8" }));
+  s.addText("والأقساط لا تثبت: تُسعَّر لفترات قصيرة (7 أيام عادةً) وتُراجع يومياً.", ar({ x: M, y: 6.3, w: CW, h: 0.38, fontSize: 15, bold: true, color: NAVY }));
+  s.addText("المصادر: S&P Global وPolicyholder Pulse والشرق الأوسط (2023–2024)، رويترز عبر Insurance Journal (سبتمبر 2026). أرقام عروض سوقية لتأمين جسم السفينة، وليست أسعاراً متفقاً عليها.", ar({ x: M, y: 6.68, w: CW, h: 0.28, fontSize: 9.5, color: "8A97A8" }));
+  s.addNotes("2023: نحو 0.05% من قيمة السفينة لعبور البحر الأحمر. نهاية 2023 و2024: بين 0.7% و1%. 2026: ينبع نحو 3% (من أقل من 1% في يوليو)، جنوب ينبع نحو 7%، هرمز بين 6% و9%.");
 
   // ================= 3. PROBLEM: user pain =================
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "المشكلة" });
@@ -152,13 +156,13 @@ async function rings(color, opacity) {
   pres.addSection({ title: "الحل والاستراتيجية" });
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "الحل والاستراتيجية" });
   kicker(s, "الحل");
-  s.addText("لذلك نقترح «مرساة»", { placeholder: "title" });
-  s.addText("منصة وطنية تقوم على فكرة واحدة: أن نصنع مؤشر خطر سعودياً خاصاً بنا للمسارات البحرية، ببياناتنا ومنهجيتنا، لا بالاعتماد على تقييم لجنة الحرب المشتركة، ونضعه في موقع واحد يجمع للشاحن الخطر والتكلفة والمؤمّنين السعوديين.",
+  s.addText("لذلك نقترح مرساة", { placeholder: "title" });
+  s.addText("منصة وطنية تقوم على فكرة واحدة: أن نصنع مؤشر خطر سعودياً خاصاً بنا للمسارات البحرية، ببياناتنا ومنهجيتنا، لا بالاعتماد على تقييم لجنة الحرب المشتركة، ونضعه في موقع واحد يجمع لصاحب البضاعة ومالك السفينة الخطر والتكلفة والمؤمّنين السعوديين.",
     ar({ x: M, y: 1.6, w: CW, h: 0.95, fontSize: 15.5, color: MUTED, lineSpacingMultiple: 1.2 }));
   const ins = ["الحوادث الأمنية البحرية", "تتبع السفن (AIS) الوطني", "بيانات الموانئ السعودية", "أقساط ومطالبات المؤمّنين السعوديين"];
-  const outs = ["درجة خطر لكل منطقة ومسار", "قسط تقديري لكل مسار وميناء", "مقارنة محايدة بين المؤمّنين", "تنبيه بأفضل وقت للتأمين"];
+  const outs = ["درجة خطر لكل منطقة ومسار", "قسط تقديري للبضاعة وللسفينة", "مقارنة محايدة بين المؤمّنين", "تنبيه بأفضل وقت للتأمين"];
   s.addText("بياناتنا الوطنية", ar({ x: 9.2, y: 2.65, w: R - 9.2, h: 0.4, fontSize: 14, bold: true, color: TEAL }));
-  s.addText("ما يحصل عليه الشاحن", ar({ x: M, y: 2.65, w: 3.7, h: 0.4, fontSize: 14, bold: true, color: TEAL }));
+  s.addText("ما يحصل عليه المستخدم", ar({ x: M, y: 2.65, w: 3.7, h: 0.4, fontSize: 14, bold: true, color: TEAL }));
   ins.forEach((t, i) => {
     const y = 3.1 + i * 0.8;
     s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 9.2, y, w: R - 9.2, h: 0.66, rectRadius: 0.1, fill: { color: WHITE }, line: { color: LINE } });
@@ -176,6 +180,35 @@ async function rings(color, opacity) {
   s.addShape(pres.shapes.LINE, { x: 8.2, y: 4.35, w: 0.85, h: 0, line: { color: TEAL, width: 2.5, beginArrowType: "triangle" } });
   s.addShape(pres.shapes.LINE, { x: 4.42, y: 4.35, w: 0.72, h: 0, line: { color: TEAL, width: 2.5, beginArrowType: "triangle" } });
   s.addText("مؤشر نصنعه نحن ونملكه، والتأكيد النهائي للسعر يبقى من شركة التأمين.", ar({ x: M, y: 6.45, w: CW, h: 0.35, fontSize: 13, bold: true, color: TEAL_D }));
+
+  // ================= 4b. HULL vs CARGO =================
+  s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "الحل والاستراتيجية" });
+  kicker(s, "نوعا التأمين");
+  s.addText("تأمين السفينة وتأمين البضاعة: مرساة تخدم الاثنين", { placeholder: "title" });
+  s.addText("في الرحلة الواحدة يوجد تأمينان مختلفين، لكلٍّ منهما دافع وطريقة حساب. ومرساة تقدّم مساراً واضحاً لكل منهما.", ar({ x: M, y: 1.58, w: CW, h: 0.5, fontSize: 15, color: MUTED }));
+  {
+    const cw2 = (CW - 0.4) / 2, y0 = 2.2, hh = 3.6;
+    const cols = [
+      [lu.LuPackage, "تأمين البضاعة", "Cargo War Risk", [["من يدفع؟", "صاحب البضاعة: المصدّر أو المستورد"], ["كيف يُحسب؟", "نسبة من قيمة الشحنة"], ["ما يؤثر فيه", "نوع البضاعة ومسارها، وتنتقل إليه أيضاً تكلفة السفينة عبر أجرة الشحن"], ["في مرساة", "مقارنة عروض المؤمّنين لكل شحنة، وتنبيه بأفضل سعر"]]],
+      [lu.LuShip, "تأمين جسم السفينة", "Hull War Risk", [["من يدفع؟", "مالك السفينة أو مشغّلها"], ["كيف يُحسب؟", "نسبة من قيمة السفينة لكل رحلة أو فترة خطر"], ["ما يؤثر فيه", "منطقة العبور، وقيمة السفينة، ومدة بقائها في منطقة الخطر"], ["في مرساة", "قسط تقديري لكل رحلة، ومؤمّنو الهياكل المشاركون في الوعاء الوطني"]]],
+    ];
+    for (let k = 0; k < 2; k++) {
+      const x = R - cw2 - k * (cw2 + 0.4), c = cols[k];
+      card(s, x, y0, cw2, hh);
+      await bubble(s, c[0], x + cw2 - 1.05, y0 + 0.25, 0.8, k === 0 ? TEAL : NAVY, WHITE);
+      s.addText(c[1], ar({ x: x + 0.3, y: y0 + 0.25, w: cw2 - 1.5, h: 0.48, fontSize: 21, bold: true, color: NAVY }));
+      s.addText(c[2], ar({ x: x + 0.3, y: y0 + 0.7, w: cw2 - 1.5, h: 0.3, fontSize: 11, color: MUTED }));
+      c[3].forEach((r, i) => {
+        const y = y0 + 1.2 + i * 0.58;
+        if (i) s.addShape(pres.shapes.LINE, { x: x + 0.3, y: y - 0.04, w: cw2 - 0.6, h: 0, line: { color: LINE, width: 0.75 } });
+        s.addText(r[0], ar({ x: x + cw2 - 1.65, y, w: 1.35, h: 0.52, fontSize: 12.5, bold: true, color: i === 3 ? TEAL_D : MUTED, valign: "middle" }));
+        s.addText(r[1], ar({ x: x + 0.3, y, w: cw2 - 2.0, h: 0.52, fontSize: 12.5, bold: i === 3, color: i === 3 ? TEAL_D : INK, valign: "middle" }));
+      });
+    }
+  }
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: M, y: 5.98, w: CW, h: 0.75, rectRadius: 0.12, fill: { color: NAVY }, line: { color: NAVY } });
+  s.addText([{ text: "مؤشر واحد للمسارين:  ", options: { bold: true, color: ICE } }, { text: "درجة خطر المنطقة نفسها تُترجم إلى قسط للسفينة وقسط للبضاعة. وأسعار تأمين البضاعة لا تُنشر علناً، وهذه الفجوة التي تسدها مرساة.", options: { color: WHITE } }],
+    ar({ x: M + 0.3, y: 5.98, w: CW - 0.6, h: 0.75, fontSize: 13.5, valign: "middle" }));
 
   // ================= 5. STRATEGY =================
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "الحل والاستراتيجية" });
@@ -206,7 +239,7 @@ async function rings(color, opacity) {
   s.addText("كيف يستخدم الشاحن مرساة؟ أربع خطوات", { placeholder: "title" });
   const steps = [
     [lu.LuRadar, "الرادار", "خريطة حية لمناطق الخطر وحركة السفن، ومسارات مقترحة لكل منها درجة خطر ومدة وقسط متوقع."],
-    [lu.LuShieldCheck, "شركات التأمين", "كل مؤمّن سعودي: الشحنات التي يغطيها، وأنواع وثائقه، ومشاركته في الوعاء الوطني."],
+    [lu.LuShieldCheck, "شركات التأمين", "كل مؤمّن سعودي: ما يغطيه للبضاعة والسفينة، وأنواع وثائقه، ومشاركته في الوعاء الوطني."],
     [lu.LuBellRing, "مشاريعي", "يحفظ الشاحن شحنته، ويصله تنبيه عند تغيّر القسط أو وصوله للسعر الذي حدده."],
     [lu.LuSparkles, "الذكاء الاصطناعي", "يقترح أفضل وقت للتأمين مع درجة ثقة، ويرشّح المؤمّن الأنسب مع سبب الترتيب."],
   ];
@@ -228,7 +261,7 @@ async function rings(color, opacity) {
     let w = maxW, h = w / aspect; if (h > maxH) { h = maxH; w = h * aspect; }
     const ix = M + 0.06, iy = 1.7;
     shot(s, file, ix, iy, w, h, title);
-    s.addText("لقطة من النموذج الأولي، والأسماء والأرقام توضيحية", ar({ x: ix, y: iy + h + 0.14, w, h: 0.3, fontSize: 10, color: "8A97A8" }));
+    s.addText("لقطة من النموذج الأولي التجريبي لمرساة، والأسماء والأرقام توضيحية وليست من مصدر رسمي", ar({ x: ix, y: iy + h + 0.14, w, h: 0.3, fontSize: 10, color: "8A97A8" }));
     const cx = ix + w + 0.45, cw = R - cx;
     callouts.forEach((c, i) => {
       const y = 1.75 + i * 1.62;
@@ -243,7 +276,7 @@ async function rings(color, opacity) {
     ["قارن المسارات", "لكل مسار: أعلى درجة خطر، والمدة، والمسافة، وعدد مناطق الخطر التي يعبرها."],
   ]);
   await screen("الشاشة 2 · الأسعار", "كم سيكلف التأمين؟ ومتى أؤمّن؟", "prices_top.png", 2880 / 1880, [
-    ["القسط التقديري", "يكتب الشاحن قيمة الشحنة، فيرى أقل قسط ومتوسطه وتغيّره خلال 14 يوماً."],
+    ["قسط البضاعة التقديري", "يكتب صاحب البضاعة قيمة الشحنة، فيرى أقل قسط ومتوسطه وتغيّره خلال 14 يوماً."],
     ["توصية التوقيت", "الذكاء الاصطناعي يقترح متى يؤمّن الشاحن، مع درجة ثقة واضحة."],
     ["تنبيه السعر", "يحفظ الشحنة ويحدد سعراً، فيصله إشعار عند نزول القسط."],
   ]);
@@ -252,6 +285,29 @@ async function rings(color, opacity) {
     ["ما يغطيه كل مؤمّن", "أنواع الشحنات (حاويات، زيوت، سيارات، مبردة) والوثائق ونطاق استرشادي للقسط."],
     ["اطلب عرضاً رسمياً", "ينتقل الشاحن مباشرة إلى المؤمّن السعودي، ولا يوجد ترتيب مدفوع."],
   ]);
+
+  // ================= 9b. VIDEO + QR =================
+  s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "الموقع" });
+  kicker(s, "جرّب مرساة بنفسك");
+  s.addText("شاهد النموذج الأولي وهو يعمل", { placeholder: "title" });
+  {
+    const vw = 8.4, vh = vw * 9 / 16, vx = M + 0.06, vy = 1.75;
+    const cover = "data:image/jpeg;base64," + require("fs").readFileSync(path.join(SHOTS, "demo_cover.jpeg")).toString("base64");
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: vx - 0.06, y: vy - 0.06, w: vw + 0.12, h: vh + 0.12, rectRadius: 0.08, fill: { color: WHITE }, line: { color: LINE },
+      shadow: { type: "outer", color: "0B2545", opacity: 0.18, blur: 14, offset: 4, angle: 90 } });
+    s.addMedia({ type: "video", path: path.join(SHOTS, "demo.mp4"), x: vx, y: vy, w: vw, h: vh, cover });
+    s.addText("فيديو قصير يشرح طريقة استخدام منصة مرساة، من اختيار الميناء إلى طلب عرض التأمين", ar({ x: vx, y: vy + vh + 0.15, w: vw, h: 0.35, fontSize: 12, color: MUTED }));
+    const qx = vx + vw + 0.45, qw = R - qx;
+    card(s, qx, vy - 0.06, qw, vh + 0.12);
+    const qs = 2.1;
+    s.addImage({ path: path.join(SHOTS, "qr_canva.png"), x: qx + (qw - qs) / 2, y: vy + 0.2, w: qs, h: qs, altText: "رمز QR لفتح موقع مرساة" });
+    s.addText("امسح الرمز وجرّب الموقع", ctr({ x: qx + 0.15, y: vy + 2.42, w: qw - 0.3, h: 0.4, fontSize: 15, bold: true, color: NAVY }));
+    ["اختر ميناءيك وشاهد خطر كل مسار", "تفقّد أسعار التأمين وتغيّرها", "قارن المؤمّنين واطلب عرضاً"].forEach((t2, i) => {
+      const y = vy + 2.9 + i * 0.42;
+      badge(s, i + 1, qx + qw - 0.5, y + 0.04, 0.3);
+      s.addText(t2, ar({ x: qx + 0.2, y, w: qw - 0.8, h: 0.38, fontSize: 12, color: INK, valign: "middle" }));
+    });
+  }
 
   // ================= 10. VISION 2030 + POOL =================
   pres.addSection({ title: "رؤية المملكة" });
@@ -306,12 +362,12 @@ async function rings(color, opacity) {
     });
     s.addText("المعلومات حاضرة في كل شيء: في كل خطوة وكل قرار. ومن يملك البيانات يملك القرار.", ctr({ x: M + 0.3, y: 5.85, w: 4.6, h: 0.7, fontSize: 13, bold: true, color: TEAL_D }));
     const why = [
-      [lu.LuDatabase, "نملك بياناتنا", "البيانات أساس الهرم، ومنها تُبنى المعلومات والمعرفة والقرار. ومع سنوات التشغيل تتراكم لدى المملكة بيانات متميزة عن مناطقها."],
+      [lu.LuDatabase, "نملك بياناتنا", "البيانات أساس الهرم، ومنها تُبنى المعلومات والمعرفة والقرار. ومع سنوات التشغيل تتراكم لدى المملكة بيانات متميزة عن مناطقها وعن النقل البحري تحديداً، وتكون كلها في منصة واحدة."],
       [lu.LuFlag, "استقلال لوجستي", "قدرة وطنية تقلل اعتماد خطة المملكة اللوجستية على المراجع الخارجية."],
       [lu.LuEarth, "مرجع عالمي مستقبلاً", "يبدأ بالمناطق المحيطة بالمملكة ويتوسع، وقد تعتمد عليه دول أخرى."],
       [lu.LuTrainFront, "يكمل منظومة النقل", "جزء مما تبنيه المملكة من موانئ وقطارات وبنية لوجستية نحو المركز العالمي."],
     ];
-    const hs = [1.45, 1.1, 1.1, 1.1];
+    const hs = [1.6, 1.05, 1.05, 1.05];
     let y = 1.8;
     for (let i = 0; i < 4; i++) {
       const x = 6.2;
@@ -343,41 +399,120 @@ async function rings(color, opacity) {
     s.addText(tr[i][2], ar({ x: x + 0.35, y: y + 0.95, w: tw2 - 1.7, h: 1.05, fontSize: 14.5, color: hl ? SOFT : MUTED, lineSpacingMultiple: 1.15 }));
   }
 
-  // ================= 13. TIMELINE =================
+  // ================= 13a. STAKEHOLDERS =================
   pres.addSection({ title: "التنفيذ والتفاصيل" });
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "التنفيذ والتفاصيل" });
-  kicker(s, "خطة التنفيذ");
-  s.addText("خمس مراحل خلال خمس سنوات", { placeholder: "title" });
+  kicker(s, "الجهات المشاركة");
+  s.addText("مشروع وطني تشترك فيه الجهات ذات الصلة", { placeholder: "title" });
+  s.addText("تملك المنصة الهيئة العامة للنقل وهيئة التأمين تحت مظلة وزارة النقل والخدمات اللوجستية، وتشارك فيها الجهات التالية:", ar({ x: M, y: 1.58, w: CW, h: 0.45, fontSize: 15, color: MUTED }));
   {
-    const top = 1.75, labelW = 4.6, gx1 = R - labelW, gx0 = M, yw = (gx1 - gx0) / 5, rowH = 0.8;
-    card(s, M, top, CW, 4.7);
-    // year columns (year 1 on the right)
-    for (let y = 1; y <= 5; y++) {
-      const x = gx1 - y * yw;
-      if (y % 2) s.addShape(pres.shapes.RECTANGLE, { x, y: top + 0.6, w: yw, h: 4.0 - 0.05, fill: { color: "F7F9FC" }, line: { color: "F7F9FC" } }) ;
-      s.addText(`السنة ${y}`, ctr({ x, y: top + 0.15, w: yw, h: 0.4, fontSize: 14, bold: true, color: NAVY }));
-    }
-    s.addShape(pres.shapes.LINE, { x: M + 0.2, y: top + 0.6, w: CW - 0.4, h: 0, line: { color: LINE, width: 1 } });
-    const ph = [
-      ["صنع مقياس الخطر السعودي", "الموانئ والحوادث وحركة السفن (AIS)", 0, 2, TEAL],
-      ["الاتفاق مع شركات التأمين", "مؤمّنان سعوديان على الأقل لعرض التغطيات والأسعار", 1, 2, TEAL_D],
-      ["بناء الموقع وتأمينه", "بناء المنصة وحمايتها من الاختراق", 1, 3, NAVY2],
-      ["إطلاق تجريبي", "ربط الخطر بالسعر والتنبيهات مع شركات محدودة", 2, 3, ORANGE],
-      ["الإطلاق الرسمي", "اعتماد المؤشر محلياً ثم إقليمياً", 3, 5, NAVY],
+    const groups = [
+      [lu.LuLandmark, "الملكية والتنظيم", [["وزارة النقل والخدمات اللوجستية", "المظلة والإشراف العام"], ["الهيئة العامة للنقل", "مالك مشارك، وتشغيل المنصة"], ["هيئة التأمين", "مالك مشارك، وتنظيم الجانب التأميني"]]],
+      [lu.LuDatabase, "مصادر البيانات", [["الهيئة العامة للموانئ (موانئ)", "بيانات الموانئ وحركة السفن"], ["حرس الحدود", "بيانات الحوادث الأمنية البحرية"], ["هيئة الزكاة والضريبة والجمارك", "بيانات الشحنات والبضائع"]]],
+      [lu.LuShieldCheck, "سوق التأمين", [["الشركة السعودية لإعادة التأمين", "قيادة الوعاء الوطني لمخاطر الحرب"], ["شركات التأمين السعودية", "العروض والأسعار والتغطيات"], ["ملاك السفن والشاحنون", "المستفيدون، ومصدر للتغذية الراجعة"]]],
+      [lu.LuLock, "الحماية والتمكين", [["الهيئة الوطنية للأمن السيبراني", "ضوابط الأمن السيبراني والامتثال"], ["سدايا", "حوكمة البيانات والذكاء الاصطناعي"], ["الجامعات ومراكز البحث", "مراجعة مستقلة لمنهجية المؤشر"]]],
     ];
+    const gw = (CW - 3 * 0.3) / 4, y0 = 2.15;
+    for (let g = 0; g < 4; g++) {
+      const x = R - gw - g * (gw + 0.3), G = groups[g];
+      card(s, x, y0, gw, 4.45);
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: y0, w: gw, h: 0.75, rectRadius: 0.12, fill: { color: g === 0 ? NAVY : ICE_BG }, line: { color: g === 0 ? NAVY : ICE_BG } });
+      s.addImage({ data: await icon(G[0], g === 0 ? ICE : TEAL_D), x: x + gw - 0.6, y: y0 + 0.2, w: 0.36, h: 0.36 });
+      s.addText(G[1], ar({ x: x + 0.2, y: y0, w: gw - 0.9, h: 0.75, fontSize: 16, bold: true, color: g === 0 ? WHITE : TEAL_D, valign: "middle" }));
+      G[2].forEach((e, i) => {
+        const y = y0 + 0.95 + i * 1.15;
+        if (i) s.addShape(pres.shapes.LINE, { x: x + 0.25, y: y - 0.1, w: gw - 0.5, h: 0, line: { color: LINE, width: 0.75 } });
+        s.addText(e[0], ar({ x: x + 0.25, y: y - 0.05, w: gw - 0.5, h: 0.52, fontSize: 13, bold: true, color: NAVY }));
+        s.addText(e[1], ar({ x: x + 0.25, y: y + 0.52, w: gw - 0.5, h: 0.45, fontSize: 11.5, color: MUTED }));
+      });
+    }
+  }
+  s.addText("الأدوار مقترحة، وتُحدَّد رسمياً في مرحلة الاتفاقيات.", ar({ x: M, y: 6.68, w: CW, h: 0.28, fontSize: 10, color: "8A97A8" }));
+
+  // ================= 13. TIMELINE (stage-gate) =================
+  s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "التنفيذ والتفاصيل" });
+  kicker(s, "خطة التنفيذ");
+  s.addText("مشروع خماسي: خمس مراحل، ولكل مرحلة بوابة عبور", { placeholder: "title" });
+  s.addText("لا ننتقل إلى المرحلة التالية إلا بعد اجتياز بوابة المرحلة الحالية، وعندها تُراجَع الخطة والتكلفة.", ar({ x: M, y: 1.58, w: CW, h: 0.4, fontSize: 14.5, color: MUTED }));
+  {
+    const ph = [
+      ["صنع مقياس الخطر", 0, 12, TEAL, "تقدير مقياس الخطر وحركة السفن (AIS) بمنهجية شفافة", "منهجية معتمدة بمراجعة مستقلة، واتفاقيات البيانات موقّعة"],
+      ["الاتفاق مع المؤمّنين", 12, 18, TEAL_D, "اتفاقيات مع مؤمّنين سعوديين للبضاعة والسفينة", "اتفاقيتان على الأقل، وربط مع الوعاء الوطني"],
+      ["بناء المنصة وتأمينها", 18, 30, NAVY2, "المنصة والربط البرمجي ببرمجة آمنة", "اجتياز اختبار الاختراق وضوابط الأمن السيبراني"],
+      ["إطلاق تجريبي", 30, 36, ORANGE, "تجربة مع عدد محدود من الشاحنين والمؤمّنين", "تحقيق مؤشرات التجربة: دقة التقدير ورضا المستخدمين"],
+      ["الإطلاق الرسمي والتوسع", 36, 60, NAVY, "إطلاق وطني، ثم توسع إقليمي ومراجعة دورية", "مراجعة سنوية للمؤشر، وقرار التوسع الإقليمي"],
+    ];
+    // month strip (month 0 on the right)
+    const sx0 = M + 0.1, sx1 = R - 0.1, sw = sx1 - sx0, sy = 2.45, mx = (m) => sx1 - (m / 60) * sw;
+    for (let yv = 1; yv <= 5; yv++) s.addText(`السنة ${yv}`, ctr({ x: mx(yv * 12), y: 2.05, w: sw / 5, h: 0.3, fontSize: 11.5, bold: true, color: MUTED }));
     ph.forEach((p, i) => {
-      const y = top + 0.68 + i * rowH;
-      badge(s, i + 1, R - 0.55, y + 0.15, 0.42, p[4]);
-      s.addText(p[0], ar({ x: gx1 + 0.15, y: y + 0.0, w: labelW - 0.85, h: 0.38, fontSize: 14, bold: true, color: NAVY }));
-      s.addText(p[1], ar({ x: gx1 + 0.15, y: y + 0.38, w: labelW - 0.85, h: 0.34, fontSize: 11, color: MUTED }));
-      const bx = gx1 - p[3] * yw + 0.08, bw = (p[3] - p[2]) * yw - 0.16;
-      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: y + 0.12, w: bw, h: 0.5, rectRadius: 0.25, fill: { color: p[4] }, line: { color: p[4] } });
-      const span = p[3] - p[2] > 1 ? `السنة ${p[2] + 1}–${p[3]}` : `السنة ${p[3]}`;
-      s.addText(span, ctr({ x: bx, y: y + 0.12, w: bw, h: 0.5, fontSize: 12, bold: true, color: WHITE, valign: "middle" }));
+      const x1 = mx(p[2]), x2 = mx(p[1]);
+      s.addShape(pres.shapes.RECTANGLE, { x: x1, y: sy, w: x2 - x1, h: 0.32, fill: { color: p[3] }, line: { color: WHITE, width: 1.5 } });
+      s.addText(String(i + 1), ctr({ x: x1, y: sy, w: x2 - x1, h: 0.32, fontSize: 11, bold: true, color: WHITE, valign: "middle" }));
+      const dx = x1 - 0.13;
+      s.addShape(pres.shapes.DIAMOND, { x: dx, y: sy - 0.04, w: 0.26, h: 0.4, fill: { color: AMBER }, line: { color: WHITE, width: 1 } });
+    });
+    // phase cards
+    const cw5 = (CW - 4 * 0.2) / 5, cy = 3.05, chh = 3.45;
+    ph.forEach((p, i) => {
+      const x = R - cw5 - i * (cw5 + 0.2);
+      card(s, x, cy, cw5, chh);
+      badge(s, i + 1, x + cw5 - 0.55, cy + 0.2, 0.36, p[3]);
+      s.addText(`الأشهر ${p[1] + 1}–${p[2]}`, ar({ x: x + 0.15, y: cy + 0.2, w: cw5 - 0.8, h: 0.36, fontSize: 11, bold: true, color: MUTED, valign: "middle" }));
+      s.addText(p[0], ar({ x: x + 0.2, y: cy + 0.66, w: cw5 - 0.4, h: 0.55, fontSize: 13, bold: true, color: NAVY }));
+      s.addText(p[4], ar({ x: x + 0.2, y: cy + 1.25, w: cw5 - 0.4, h: 0.72, fontSize: 11, color: MUTED }));
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.12, y: cy + 2.02, w: cw5 - 0.24, h: 1.3, rectRadius: 0.08, fill: { color: "FFF6E5" }, line: { color: "F3D9A4" } });
+      s.addText(`◆ بوابة ${i + 1}`, ar({ x: x + 0.25, y: cy + 2.08, w: cw5 - 0.5, h: 0.32, fontSize: 11.5, bold: true, color: "8A5A00" }));
+      s.addText(p[5], ar({ x: x + 0.25, y: cy + 2.4, w: cw5 - 0.5, h: 0.85, fontSize: 11, color: INK }));
     });
   }
-  s.addText([{ text: "الجهة المالكة المقترحة: ", options: { bold: true, color: NAVY } }, { text: "مشروع مشترك بين هيئة التأمين والهيئة العامة للنقل تحت وزارة النقل والخدمات اللوجستية، بالتنسيق مع موانئ والشركة السعودية لإعادة التأمين.", options: { color: MUTED } }],
-    ar({ x: M, y: 6.62, w: CW, h: 0.35, fontSize: 12 }));
+
+  // ================= 13b. COST =================
+  s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "التنفيذ والتفاصيل" });
+  kicker(s, "التكلفة التقديرية");
+  s.addText("كم تكلّف مرساة؟ نحو 27 مليون ريال على خمس سنوات", { placeholder: "title" });
+  {
+    const items = [
+      ["بناء مؤشر الخطر", "بيانات ومنهجية ومراجعة مستقلة", 5.0, TEAL],
+      ["تطوير المنصة", "تصميم وبرمجة وربط المؤمّنين", 6.0, TEAL_D],
+      ["الأمن السيبراني وحماية البيانات", "تفاصيله في البطاقة المجاورة", 5.0, RED],
+      ["البنية السحابية داخل المملكة", "استضافة وتخزين ونسخ احتياطي", 2.5, NAVY2],
+      ["تراخيص البيانات والشراكات", "مزود تتبع مؤقت، وقانوني وتعاقدي", 2.5, "6E8DB3"],
+      ["التشغيل والدعم", "سنتان بعد الإطلاق", 3.5, NAVY],
+      ["احتياطي للطوارئ", "نحو 10% من الإجمالي", 2.5, "A0AEC0"],
+    ];
+    const lw = 7.35, lx = R - lw, y0 = 1.65;
+    card(s, lx, y0, lw, 5.05);
+    s.addText("27 مليون ريال", ar({ x: lx + 0.3, y: y0 + 0.15, w: 3.6, h: 0.65, fontSize: 30, bold: true, color: NAVY, valign: "middle" }));
+    s.addText("إجمالي تقديري لبناء المنصة وتشغيلها خلال 5 سنوات", ar({ x: lx + 3.9, y: y0 + 0.15, w: lw - 4.2, h: 0.65, fontSize: 12, color: MUTED, valign: "middle" }));
+    const maxV = 6.0, barMax = 2.2;
+    items.forEach((it, i) => {
+      const y = y0 + 0.98 + i * 0.57, hl = i === 2;
+      if (hl) s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: lx + 0.12, y: y - 0.04, w: lw - 0.24, h: 0.54, rectRadius: 0.06, fill: { color: "FDECEC" }, line: { color: "FDECEC" } });
+      s.addText(it[0], ar({ x: lx + 3.6, y, w: lw - 3.9, h: 0.27, fontSize: 13, bold: true, color: NAVY }));
+      s.addText(it[1], ar({ x: lx + 3.6, y: y + 0.25, w: lw - 3.9, h: 0.22, fontSize: 10, color: MUTED }));
+      const bw = (it[2] / maxV) * barMax;
+      s.addShape(pres.shapes.RECTANGLE, { x: lx + 3.45 - bw, y: y + 0.12, w: bw, h: 0.24, fill: { color: it[3] }, line: { color: it[3] } });
+      s.addText(`${it[2].toFixed(1)} م`, ar({ x: lx + 0.25, y: y + 0.05, w: 0.85, h: 0.38, fontSize: 12.5, bold: true, color: INK, valign: "middle" }));
+    });
+    // security card
+    const sw2 = lx - M - 0.3;
+    card(s, M, y0, sw2, 5.05, NAVY, NAVY);
+    await bubble(s, lu.LuShieldCheck, M + sw2 - 1.0, y0 + 0.25, 0.75, TEAL, WHITE);
+    s.addText("الأمن أولاً", ar({ x: M + 0.3, y: y0 + 0.25, w: sw2 - 1.4, h: 0.4, fontSize: 19, bold: true, color: WHITE }));
+    s.addText("5 ملايين ريال، نحو 19% من الميزانية", ar({ x: M + 0.3, y: y0 + 0.65, w: sw2 - 1.4, h: 0.35, fontSize: 12.5, bold: true, color: ICE }));
+    s.addText("لأن بيانات المخاطر والأسعار والمستخدمين حساسة، خصصنا جزءاً كبيراً من الميزانية لحمايتها:", ar({ x: M + 0.3, y: y0 + 1.15, w: sw2 - 0.6, h: 0.62, fontSize: 12.5, color: SOFT }));
+    const sec = ["برمجة آمنة (Secure SDLC) ومراجعة الشيفرة", "اختبارات اختراق دورية قبل الإطلاق وبعده", "تشفير البيانات، وإدارة الهويات والصلاحيات", "مركز عمليات أمنية (SOC) على مدار الساعة", "استضافة داخل المملكة، والامتثال لضوابط الهيئة الوطنية للأمن السيبراني ونظام حماية البيانات الشخصية"];
+    const ck2 = await icon(lu.LuCircleCheck, ICE);
+    let yy = y0 + 1.85;
+    sec.forEach((t2, i) => {
+      const hh2 = i === 4 ? 0.82 : 0.52;
+      s.addImage({ data: ck2, x: M + sw2 - 0.55, y: yy + 0.08, w: 0.26, h: 0.26 });
+      s.addText(t2, ar({ x: M + 0.3, y: yy, w: sw2 - 0.95, h: hh2, fontSize: 12.5, color: WHITE }));
+      yy += hh2 + 0.06;
+    });
+  }
+  s.addText("تقدير مبدئي للتخطيط يُراجع عند كل بوابة. الافتراضات: فريق محلي، واستضافة سحابية داخل المملكة، وتشغيل سنتين بعد الإطلاق.", ar({ x: M, y: 6.78, w: CW, h: 0.25, fontSize: 9.5, color: "8A97A8" }));
 
   // ================= 14. COMPARISON =================
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "التنفيذ والتفاصيل" });
@@ -467,7 +602,7 @@ async function rings(color, opacity) {
   s.addText("تمكين المؤمّن السعودي، وقرار أوضح للشاحن", { placeholder: "title" });
   const imp = [
     [lu.LuShieldCheck, "المؤمّنون السعوديون", "قناة رقمية تصلهم بعملاء جدد، وتقلل اعتماد السوق على المؤمّنين العالميين."],
-    [lu.LuContainer, "الشاحنون", "مقارنة المؤمّنين وتكلفة كل مسار في مكان واحد، وتنبيه بأفضل وقت للتأمين."],
+    [lu.LuContainer, "الشاحنون وملاك السفن", "مقارنة المؤمّنين وتكلفة كل مسار للبضاعة والسفينة، وتنبيه بأفضل وقت."],
     [lu.LuLandmark, "الوعاء الوطني", "واجهة رقمية تسهّل وصول المستفيدين إلى المؤمّنين المشاركين."],
     [lu.LuDatabase, "الدولة", "بيانات وطنية عن المسارات والمخاطر تدعم قرارات الجهات المنظمة."],
   ];
@@ -502,14 +637,13 @@ async function rings(color, opacity) {
   s = pres.addSlide({ masterName: "LIGHT", sectionTitle: "الختام" });
   kicker(s, "الفريق");
   s.addText("فريق مرساة", { placeholder: "title" });
-  const team = [[lu.LuUserRound, "قائد الفريق", "التنسيق والتسليم وتمثيل الفريق"], [lu.LuBriefcase, "المجال والأعمال", "القيمة والجدوى وعلاقات المؤمّنين"], [lu.LuCode, "التقنية والبيانات", "الحل والنموذج الأولي ومصادر البيانات"], [lu.LuPalette, "التصميم وتجربة المستخدم", "الرحلة والواجهات"]];
+  const team = [[lu.LuUserRound, "قائد الفريق", "", "سارة أحمد العرادي"], [lu.LuBriefcase, "المجال والأعمال", "", "يارا يحيى عثمان"], [lu.LuCode, "التقنية والبيانات", "", "البتول باقيس"], [lu.LuPalette, "التصميم وتجربة المستخدم", "", "رازان باقيس"]];
   for (let i = 0; i < 4; i++) {
     const x = R - pw - i * (pw + 0.3), y = 1.85;
-    card(s, x, y, pw, 4.5);
+    card(s, x, y, pw, 3.9);
     await bubble(s, team[i][0], x + pw / 2 - 0.75, y + 0.45, 1.5, i === 0 ? NAVY : ICE_BG, i === 0 ? ICE : TEAL_D);
-    s.addText("الاسم", ctr({ x: x + 0.2, y: y + 2.2, w: pw - 0.4, h: 0.5, fontSize: 20, bold: true, color: NAVY }));
-    s.addText(team[i][1], ctr({ x: x + 0.2, y: y + 2.75, w: pw - 0.4, h: 0.45, fontSize: 13.5, bold: true, color: TEAL }));
-    s.addText(team[i][2], ctr({ x: x + 0.25, y: y + 3.4, w: pw - 0.5, h: 0.8, fontSize: 13, color: MUTED }));
+    s.addText(team[i][3], ctr({ x: x + 0.2, y: y + 2.3, w: pw - 0.4, h: 0.55, fontSize: 18, bold: true, color: NAVY }));
+    s.addText(team[i][1], ctr({ x: x + 0.2, y: y + 2.9, w: pw - 0.4, h: 0.45, fontSize: 14, bold: true, color: TEAL }));
   }
 
   // ================= 19. CLOSING =================

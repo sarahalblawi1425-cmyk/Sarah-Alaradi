@@ -9,16 +9,33 @@
 ## 1. Project summary
 
 ### The problem
-- **Geopolitical tension raised war-risk insurance sharply.** A ship crossing a security-tension zone (Red Sea, Bab el-Mandeb, Strait of Hormuz) pays an extra *war-risk premium*.
-  - Before the tension: about **$100K** per tanker trip.
-  - After: about **$3M** from Yanbu, and about **$7M** from southern Saudi ports or via Hormuz.
-  - Yanbu tanker premiums went from **<1% to ~3%** of hull value, and can reach **7%** for ports south of Yanbu such as Jazan.
-  - Source: Reuters via Insurance Journal, Sep 2026.
+- **Geopolitical conditions raised marine insurance sharply.** A ship crossing a security-tension zone (Red Sea, Bab el-Mandeb, Strait of Hormuz) pays an extra premium known in the market as *war-risk insurance* (in the deck we say "geopolitical conditions" and keep "war" only in official product/pool names).
+  - Hull war-risk premium, as % of ship value per voyage, and the cost for a $100M tanker:
+
+    | Period | Premium | Cost |
+    |---|---|---|
+    | 2023, before Red Sea escalation | ~0.05% | ~$50K |
+    | 2024 | ~0.7–1% | |
+    | 2026, Yanbu (was <1% in early July) | ~3% | ~$3M |
+    | 2026, south of Yanbu / Hormuz | ~7% (Hormuz 6–9%) | ~$7M |
+
+  - Sources: S&P Global, Policyholder Pulse, Asharq Al-Awsat (2023–24); Reuters via Insurance Journal (Sep 2026). All are market quotes for **hull** cover. No public figures exist for cargo-value rates.
 - **Premiums are volatile.** They usually cover 7 days and are repriced every 24 hours.
 - **One foreign reference dominates.** The Joint War Committee (JWC) in London effectively monopolises risk-zone assessment, and most countries and insurers follow it. Saudi Arabia has no national risk index for its own trade routes.
 - **No price transparency.** Agreed prices aren't public, and the figures that circulate are broker quotes.
 - **Shippers decide blind.** They contact each insurer separately and can't see how the premium changes if they switch port or route.
 - **Weak local insurers.** Marine, aviation, transport and liability together are only ~4.5% of Saudi written premiums (GlobalData, 2023), so premiums flow to foreign insurers.
+
+### Two kinds of insurance (both are in scope)
+
+| | **Cargo war risk** (تأمين البضاعة) | **Hull war risk** (تأمين جسم السفينة) |
+|---|---|---|
+| Who pays | Cargo owner: exporter or importer | Shipowner or operator |
+| Priced as | % of cargo value | % of ship value per voyage or risk period |
+| Driven by | Cargo type and route; hull cost is often passed on through freight | Transit zone, ship value, time in the risk zone |
+| In Mirsah | Insurer comparison per shipment, price alerts | Estimated premium per voyage, hull insurers in the national pool |
+
+One risk index feeds both tracks: the same zone score is translated into a hull premium and a cargo premium. The current prototype covers the **cargo** track only.
 
 ### The solution
 Mirsah has two parts:
@@ -53,24 +70,61 @@ The final price is always confirmed by the insurer.
 3. The national pool.
 4. Regulators: the Insurance Authority (هيئة التأمين) and the Transport General Authority (TGA, الهيئة العامة للنقل).
 
-### Proposed owner
-A joint project of the Insurance Authority and TGA under the Ministry of Transport & Logistic Services, coordinated with Mawani (موانئ) and Saudi Re.
+### Proposed owner and participating entities
+Owned by TGA and the Insurance Authority under the Ministry of Transport & Logistic Services. Roles are proposed and will be set formally in the agreements phase.
 
-### Implementation plan (5 years)
-
-| # | Phase | Years |
+| Group | Entity | Proposed role |
 |---|---|---|
-| 1 | Build the Saudi risk index (ports, incidents, AIS; transparent method) | 1–2 |
-| 2 | Agreements with at least 2 Saudi insurers | 2 |
-| 3 | Build and secure the platform | 2–3 |
-| 4 | Pilot with a limited set of companies | 3 |
-| 5 | Official launch; adopt the index locally, then regionally | 4–5 |
+| Ownership and regulation | Ministry of Transport & Logistic Services | Umbrella and oversight |
+| | Transport General Authority (TGA) | Co-owner, operates the platform |
+| | Insurance Authority | Co-owner, regulates the insurance side |
+| Data sources | Saudi Ports Authority (Mawani) | Port data and vessel movement |
+| | Border Guard (حرس الحدود) | Maritime security incident data |
+| | ZATCA (هيئة الزكاة والضريبة والجمارك) | Shipment and cargo data |
+| Insurance market | Saudi Re | Leads the national war-risk pool |
+| | Saudi insurers | Offers, prices and coverage |
+| | Shipowners and shippers | Users, and a source of feedback |
+| Protection and enablement | National Cybersecurity Authority (NCA) | Cybersecurity controls and compliance |
+| | SDAIA | Data and AI governance |
+| | Universities and research centres | Independent review of the index methodology |
+
+### Implementation plan (5 years, stage-gate)
+A phase starts only after the previous phase passes its gate. The plan and the cost are reviewed at each gate.
+
+| # | Phase | Months | Gate to pass |
+|---|---|---|---|
+| 1 | Build the Saudi risk index (ports, incidents, AIS; transparent method) | 1–12 | Method approved after independent review; data agreements signed |
+| 2 | Agreements with Saudi insurers (cargo and hull) | 13–18 | At least 2 agreements; link with the national pool |
+| 3 | Build and secure the platform (secure coding) | 19–30 | Pass penetration testing and NCA controls |
+| 4 | Pilot with a limited set of shippers and insurers | 31–36 | Hit pilot KPIs: estimate accuracy, user satisfaction |
+| 5 | Official launch, then regional expansion | 37–60 | Annual index review; regional expansion decision |
+
+### Estimated cost: about SAR 27M over 5 years
+This is a planning estimate, reviewed at each gate. It assumes a local team, cloud hosting inside KSA, and 2 years of operation after launch.
+
+| Item | SAR (M) |
+|---|---|
+| Risk index (data, methodology, independent review) | 5.0 |
+| Platform development (design, build, insurer integration) | 6.0 |
+| **Cybersecurity and data protection** (~19%) | **5.0** |
+| Cloud infrastructure in KSA | 2.5 |
+| Data licences and partnerships | 2.5 |
+| Operations and support (2 years) | 3.5 |
+| Contingency (~10%) | 2.5 |
+| **Total** | **27.0** |
+
+The security budget covers:
+- secure SDLC and code review;
+- penetration tests before and after launch;
+- encryption, and identity and access management;
+- a 24/7 security operations centre (SOC);
+- KSA hosting, with NCA and PDPL compliance.
 
 ### Key risks and mitigations
 
 | Risk | Mitigation |
 |---|---|
-| **JWC monopoly (biggest challenge)** | Start with our own market and routes; earn trust with a transparent method and independent review; then expand, leaning on the Kingdom's logistics position |
+| **JWC monopoly (biggest challenge):** the London reference most countries and insurers follow; any new index will be compared to it | Start with our own market and routes; earn trust with a transparent method and independent review; then expand, leaning on the Kingdom's logistics position |
 | Insurers hesitant to join | Position the platform as a channel for new clients; start with limited pilots |
 | Prices change fast | Show prices as estimates with timestamp and validity; the insurer confirms |
 | Data sensitivity and privacy | Restricted access; governance under the Personal Data Protection Law (PDPL) |
@@ -226,6 +280,8 @@ Priority: **P0** = before the demo, **P1** = strengthens the pitch, **P2** = lat
 
 ### P0: make the demo feel real
 
+> Note: the demo video embedded in the deck (slide 11) shows a newer prototype version than `presentation/prototype/mirsah-prototype.html`. It adds a risk ticker, ship/route/zone layer toggles, more routes and an assistant button. Sync that version into the repo before starting P0 work.
+
 | ID | Feature | Acceptance criteria |
 |---|---|---|
 | P0-1 | **Wire the search form** | Origin / destination / cargo / date drive the route list. Add mock routes for Singapore and Mumbai. "Any Saudi port" shows routes to all 4 ports, sorted by risk and premium. The cargo type changes the rate (e.g. oil ×1.2, refrigerated ×1.1). |
@@ -233,6 +289,7 @@ Priority: **P0** = before the demo, **P1** = strengthens the pitch, **P2** = lat
 | P0-3 | **Request-a-quote flow** | Clicking «اطلب عرضاً رسمياً» opens an in-page modal pre-filled with route, cargo, value and insurer, plus contact fields. Submit shows a confirmation ("تم إرسال الطلب" + reference no.). There is no real network call. |
 | P0-4 | **مشاريعي page** | Saved shipments list (route, value, current premium, target, status), seeded with 2 examples. "Save alert" on Prices adds a project here, using `localStorage` wrapped in try/catch. |
 | P0-5 | **المنهجية والمصادر page** | Explains the index inputs (incidents, AIS density, port data, claims/premiums, national alerts), illustrative weights, the 0–10 bands, update frequency, the "independent of JWC" stance, data sources and disclaimers. |
+| P0-0 | **Hull insurance track** | A cargo/hull switch on search and prices. Hull mode asks for ship value and voyage, shows the premium as % of ship value per voyage, and lists hull insurers in the national pool. Uses the same risk index. |
 | P0-6 | **«كيف حُسبت؟» panel** | Explains the timing recommendation: 14-day trend, volatility, risk changes, confidence. Must state "AI recommends; it doesn't set prices or risk zones". |
 
 ### P1: strengthen the story
@@ -266,16 +323,17 @@ Priority: **P0** = before the demo, **P1** = strengthens the pitch, **P2** = lat
 | Path | What it is |
 |---|---|
 | `presentation/prototype/mirsah-prototype.html` | The prototype (source of truth) |
-| `presentation/Mirsah-Pitch.pptx` / `Mirsah-Pitch-preview.pdf` | The pitch deck (19 slides, Arabic) |
+| `presentation/Mirsah-Pitch.pptx` / `Mirsah-Pitch-preview.pdf` | The pitch deck (23 slides, Arabic, includes the demo video) |
 | `presentation/screenshots/` | Prototype screenshots used in the deck |
 | `presentation/build-deck.js` | Script that generates the deck (pptxgenjs) |
 
 ## 6. Open items
-- [ ] Team names and roles (the deck's team slide still says «الاسم»).
+- [x] Team: سارة أحمد العرادي (lead), يارا يحيى عثمان (domain and business), البتول باقيس (tech and data), رازان باقيس (design and UX).
 - [ ] Decide whether to keep the deck sentence noting the JWC expanded the Red Sea high-risk zone (Jul 2026). It's used only as context for the price rise.
 - [ ] Confirm the illustrative index weights before building P0-5.
 
 ## 7. Sources (accessed Nov 2026)
+- S&P Global; Policyholder Pulse (Feb 2024); Asharq Al-Awsat: Red Sea war-risk premiums, 2023–2024 (0.05% → 0.7–1% of hull value).
 - Reuters via *Insurance Journal*: "Saudi Oil Export Strategy Hits New Hurdle as Red Sea Insurance Costs Soar" (Sep 25, 2026).
 - *Insurance Journal*: "London Insurers Expand Red Sea High-Risk Zone" (Jul 30, 2026).
 - *The Saudi Gazette* via *Hellenic Shipping News*: "Saudi Arabia approves marine war-risk insurance pool" (Sep 2026).
